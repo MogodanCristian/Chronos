@@ -87,7 +87,7 @@ namespace ChronosClient.Screens
                 };
 
                 var response = await RegisterAsync(user);
-                if(response.StatusCode == HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("User created successfully!");
                 }
@@ -97,7 +97,7 @@ namespace ChronosClient.Screens
                     MessageBox.Show(message);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -109,7 +109,8 @@ namespace ChronosClient.Screens
             if (password.Password.Length >= 6 && isValidPassword)
             {
                 password_ok.Content = "Password is valid!";
-            } else
+            }
+            else
             {
                 password_ok.Content = "Password isn't yet valid!";
             }
@@ -119,8 +120,9 @@ namespace ChronosClient.Screens
         {
             if (confirm_password.Password == password.Password)
             {
-                password_match.Content = "Passwords match!";       
-            } else
+                password_match.Content = "Passwords match!";
+            }
+            else
             {
                 password_match.Content = "Passwords don't match!";
                 password_match.Visibility = Visibility.Visible;
