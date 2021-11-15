@@ -15,10 +15,5 @@ namespace ChronosClient.Models
         public String Email { get; set; }
         public String Password { get; set; }
         public DateTime? DateOfBirth { get; set; }
-
-        public static explicit operator HttpContent(User v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
