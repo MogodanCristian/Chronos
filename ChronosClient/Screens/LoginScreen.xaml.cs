@@ -67,7 +67,14 @@ namespace ChronosClient.Screens
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     userAuthResponse = await response.Content.ReadAsAsync<UserAuthResponse>();
-                    MessageBox.Show("User authenticated successfully!\n" + userAuthResponse.Token);
+                    //MessageBox.Show("User authenticated successfully!\n" + userAuthResponse.Token);
+
+                    DashboardScreen dashboardScreen = new DashboardScreen();
+                    dashboardScreen.Show();
+
+                    var mainWindow = Application.Current.MainWindow as MainWindow;
+                    mainWindow.Close();
+
                 }
                 else
                 {
