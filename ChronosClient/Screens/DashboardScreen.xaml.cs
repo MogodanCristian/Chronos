@@ -22,6 +22,13 @@ namespace ChronosClient.Screens
         public DashboardScreen()
         {
             InitializeComponent();
+            NewPlanScreen planScreen = new NewPlanScreen();
+        }
+
+        private void new_plan_button_Click(object sender, RoutedEventArgs e)
+        {
+            NewPlanScreen planScreen = new NewPlanScreen();
+            planScreen.ShowDialog();
         }
     }
 }

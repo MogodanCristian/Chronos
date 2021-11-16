@@ -11,10 +11,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace ChronosClient.Screens
 {
@@ -46,32 +49,44 @@ namespace ChronosClient.Screens
             // VALIDATE CREDENTIALS EMPTY
             if (first_name.Text.Length == 0)
             {
-                MessageBox.Show("Please complete the First Name field!", "Warning");
+                string message = "Please complete the First Name field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (last_name.Text.Length == 0)
             {
-                MessageBox.Show("Please complete the Last Name field!", "Warning");
+                string message = "Please complete the Last Name field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (email.Text.Length == 0)
             {
-                MessageBox.Show("Please complete the Email field!", "Warning");
+                string message = "Please complete the Email field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (password.Password.Length == 0)
             {
-                MessageBox.Show("Please complete the password field!", "Warning");
+                string message = "Please complete the Password field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (confirm_password.Password.Length == 0)
             {
-                MessageBox.Show("Please complete the confirm passowrd field!", "Warning");
+                string message = "Please complete the confirm passowrd field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (!date.SelectedDate.HasValue)
             {
-                MessageBox.Show("Please complete the date of birth field!", "Warning");
+                string message = "Please complete the date of birth field!";
+                string title = "Warning";
+                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -99,7 +114,7 @@ namespace ChronosClient.Screens
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
