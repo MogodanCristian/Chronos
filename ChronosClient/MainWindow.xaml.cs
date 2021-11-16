@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChronosClient.Screens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace ChronosClient
         public MainWindow()
         {
             InitializeComponent();
+            Main.Content = new LoginScreen();
         }
     }
 }

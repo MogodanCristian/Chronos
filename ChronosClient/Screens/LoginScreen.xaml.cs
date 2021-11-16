@@ -22,7 +22,7 @@ namespace ChronosClient.Screens
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
     /// </summary>
-    public partial class LoginScreen : Window
+    public partial class LoginScreen : Page
     {
         static HttpClient client = new HttpClient();
         public LoginScreen()
@@ -49,11 +49,11 @@ namespace ChronosClient.Screens
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // check email and password empty
-            if(EmailTextBox.Text=="" || Password.Password == "")
+            if (EmailTextBox.Text == "" || Password.Password == "")
             {
                 MessageBox.Show("Credentials empty. Fill all the boxes first!");
                 return;
-            } 
+            }
             //var response = await 
             try
             {
@@ -64,7 +64,7 @@ namespace ChronosClient.Screens
                 };
                 UserAuthResponse userAuthResponse = null;
                 var response = await LoginAsync(userAuth);
-                if(response.StatusCode == HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
                     userAuthResponse = await response.Content.ReadAsAsync<UserAuthResponse>();
                     MessageBox.Show("User authenticated successfully!\n" + userAuthResponse.Token);
@@ -76,10 +76,16 @@ namespace ChronosClient.Screens
                     MessageBox.Show(message);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void GoToRegisterLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.Main.Navigate(new RegisterScreen());
         }
     }
 }

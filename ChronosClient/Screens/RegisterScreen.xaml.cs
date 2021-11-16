@@ -21,7 +21,7 @@ namespace ChronosClient.Screens
     /// <summary>
     /// Interaction logic for RegisterScreen.xaml
     /// </summary>
-    public partial class RegisterScreen : Window
+    public partial class RegisterScreen : Page
     {
         static HttpClient client = new HttpClient();
 
@@ -127,6 +127,12 @@ namespace ChronosClient.Screens
                 password_match.Content = "Passwords don't match!";
                 password_match.Visibility = Visibility.Visible;
             }
+        }
+
+        private void back_button_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.Main.Navigate(new LoginScreen());
         }
     }
 }
