@@ -1,4 +1,4 @@
-﻿using ChronosClient.Screens;
+﻿using ChronosClient.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChronosClient
+namespace ChronosClient.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BucketView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BucketView : UserControl
     {
-        public MainWindow()
+        public BucketView()
         {
             InitializeComponent();
-            Main.Content = new LoginScreen();
+        }
+        public void AddBucket(string bucketTitle)
+        {
+            buckets.Children.Add(new BucketComponent
+            {
+                BucketTitle = bucketTitle,
+                Margin = new Thickness(10)
+            });
         }
     }
 }

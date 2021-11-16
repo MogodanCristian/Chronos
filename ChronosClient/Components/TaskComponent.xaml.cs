@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChronosClient.Screens
+namespace ChronosClient.Components
 {
     /// <summary>
-    /// Interaction logic for DashboardScreen.xaml
+    /// Interaction logic for TaskComponent.xaml
     /// </summary>
-    public partial class DashboardScreen : Window
+    public partial class TaskComponent : UserControl
     {
-        public DashboardScreen()
+        public TaskComponent()
         {
             InitializeComponent();
         }

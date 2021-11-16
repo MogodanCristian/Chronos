@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -84,6 +85,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -101,19 +103,64 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\BucketComponent.xaml.cs">
+      <DependentUpon>BucketComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PlanItemCard.xaml.cs">
+      <DependentUpon>PlanItemCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TaskComponent.xaml.cs">
+      <DependentUpon>TaskComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Auth\UserAuth.cs" />
     <Compile Include="Models\Auth\UserAuthResponse.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Screens\DashboardScreen.xaml.cs">
+    <Compile Include="Models\Plan.cs" />
+    <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
+      <DependentUpon>DashboardHomeScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\PlanScreen.xaml.cs">
+      <DependentUpon>PlanScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Windows\DashboardScreen.xaml.cs">
       <DependentUpon>DashboardScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\LoginScreen.xaml.cs">
+    <Compile Include="Screens\Pages\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\RegisterScreen.xaml.cs">
+    <Compile Include="Screens\Windows\NewPlanScreen.xaml.cs">
+      <DependentUpon>NewPlanScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BucketView.xaml.cs">
+      <DependentUpon>BucketView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlanItemWrapPanelView.xaml.cs">
+      <DependentUpon>PlanItemWrapPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\RegisterScreen.xaml.cs">
       <DependentUpon>RegisterScreen.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Components\BucketComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\PlanItemCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TaskComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\DashboardHomeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\PlanScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -121,19 +168,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Screens\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Screens\DashboardScreen.xaml">
+    <Page Include="Screens\Windows\DashboardScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\LoginScreen.xaml">
+    <Page Include="Screens\Pages\LoginScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\RegisterScreen.xaml">
+    <Page Include="Screens\Windows\NewPlanScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BucketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlanItemWrapPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\RegisterScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,8 +224,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\add.jpg" />
+    <Resource Include="Resources\profile.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,8 +16,9 @@ using System.Windows.Shapes;
 using System.Net;
 using ChronosClient.Models;
 using Newtonsoft.Json;
+using ChronosClient.Screens.Windows;
 
-namespace ChronosClient.Screens
+namespace ChronosClient.Screens.Pages
 {
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
