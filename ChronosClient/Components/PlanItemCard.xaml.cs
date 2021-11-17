@@ -48,7 +48,7 @@ namespace ChronosClient.Components
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dashboardScreen = Application.Current.MainWindow as DashboardScreen;
-            dashboardScreen.dashboardFrame.Navigate(new PlanScreen());
+            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(4));
         }
     }
 }

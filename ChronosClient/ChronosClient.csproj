@@ -114,6 +114,9 @@
     </Compile>
     <Compile Include="Models\Auth\UserAuth.cs" />
     <Compile Include="Models\Auth\UserAuthResponse.cs" />
+    <Compile Include="Models\Bucket.cs" />
+    <Compile Include="Models\BucketCreateModel.cs" />
+    <Compile Include="Models\BucketDispatcher.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
@@ -128,8 +131,14 @@
     <Compile Include="Screens\Pages\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Windows\Popups\NewBucketPopup.xaml.cs">
+      <DependentUpon>NewBucketPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Windows\Popups\NewPlanScreen.xaml.cs">
       <DependentUpon>NewPlanScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Windows\Popups\NewTaskPopup.xaml.cs">
+      <DependentUpon>NewTaskPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BucketView.xaml.cs">
       <DependentUpon>BucketView.xaml</DependentUpon>
@@ -183,7 +192,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screens\Windows\Popups\NewBucketPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Windows\Popups\NewPlanScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Windows\Popups\NewTaskPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
