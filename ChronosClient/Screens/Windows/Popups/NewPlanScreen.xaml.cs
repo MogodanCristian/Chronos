@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 
-namespace ChronosClient.Screens.Windows
+namespace ChronosClient.Screens.Windows.Popups
 {
     /// <summary>
     /// Interaction logic for NewPlanScreen.xaml

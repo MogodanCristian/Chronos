@@ -128,7 +128,7 @@
     <Compile Include="Screens\Pages\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Windows\NewPlanScreen.xaml.cs">
+    <Compile Include="Screens\Windows\Popups\NewPlanScreen.xaml.cs">
       <DependentUpon>NewPlanScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BucketView.xaml.cs">
@@ -183,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\Windows\NewPlanScreen.xaml">
+    <Page Include="Screens\Windows\Popups\NewPlanScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

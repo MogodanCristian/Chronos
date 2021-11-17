@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChronosClient.Screens.Pages;
+using ChronosClient.Screens.Windows.Popups;
 
 namespace ChronosClient.Screens.Windows
 {
