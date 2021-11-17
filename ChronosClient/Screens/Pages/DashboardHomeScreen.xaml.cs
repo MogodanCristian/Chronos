@@ -1,7 +1,11 @@
-﻿using ChronosClient.Screens.Windows;
+﻿using ChronosClient.Models;
+using ChronosClient.Screens.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,13 +25,53 @@ namespace ChronosClient.Screens.Pages
     /// </summary>
     public partial class DashboardHomeScreen : Page
     {
-        public DashboardHomeScreen()
+        static HttpClient client = new HttpClient();
+
+        static async Task<HttpResponseMessage> GetPlansForUserAsync(int UserId)
         {
-            InitializeComponent();
-            PlanItemsWrapPanel.addPlanItem("Combinatii", "11-16-2021");
-            PlanItemsWrapPanel.addPlanItem("Combinatii", "11-16-2021");
-            PlanItemsWrapPanel.addPlanItem("Combinatii", "11-16-2021");
-            PlanItemsWrapPanel.addPlanItem("Combinatii", "11-16-2021");
+            HttpResponseMessage response = await client.GetAsync($"Plans/{UserId}");
+            return response;
+        }
+        public DashboardHomeScreen(UserAuthResponse userAuth)
+        {
+            try
+            {
+                InitializeComponent();
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
+                welcome_textblock.Text = "Welcome back, " + userAuth.FirstName + " " + userAuth.LastName + "!";
+                initializePlans(userAuth.UserId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void initializePlans(int UserId)
+        {
+            List<Plan> planItems = await GetPlanItems(UserId);
+            if (planItems != null)
+            {
+                foreach (Plan plan in planItems)
+                {
+                    PlanItemsWrapPanel.addPlanItem(plan.Title, plan.CreatedAt.ToString().Substring(0,10));
+                }
+            }
+        }
+
+        private async Task<List<Plan>> GetPlanItems(int UserId)
+        {
+            var response = await GetPlansForUserAsync(UserId);
+            if(response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
+            List<Plan> plans = await response.Content.ReadAsAsync<List<Plan>>();
+            return plans;
         }
     }
 }

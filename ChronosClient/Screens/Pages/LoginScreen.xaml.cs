@@ -32,6 +32,8 @@ namespace ChronosClient.Screens.Pages
             client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
         static async Task<HttpResponseMessage> LoginAsync(UserAuth user)
@@ -70,7 +72,7 @@ namespace ChronosClient.Screens.Pages
                     userAuthResponse = await response.Content.ReadAsAsync<UserAuthResponse>();
                     //MessageBox.Show("User authenticated successfully!\n" + userAuthResponse.Token);
 
-                    DashboardScreen dashboardScreen = new DashboardScreen();
+                    DashboardScreen dashboardScreen = new DashboardScreen(userAuthResponse);
                     dashboardScreen.Show();
 
                     var mainWindow = Application.Current.MainWindow as MainWindow;
