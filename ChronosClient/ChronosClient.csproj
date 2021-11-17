@@ -112,6 +112,7 @@
     <Compile Include="Components\TaskComponent.xaml.cs">
       <DependentUpon>TaskComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auth\PlanAuth.cs" />
     <Compile Include="Models\Auth\UserAuth.cs" />
     <Compile Include="Models\Auth\UserAuthResponse.cs" />
     <Compile Include="Models\User.cs" />

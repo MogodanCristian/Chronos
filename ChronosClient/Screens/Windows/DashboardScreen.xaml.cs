@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChronosClient.Screens.Pages;
 using ChronosClient.Screens.Windows.Popups;
+using ChronosClient.Views;
 
 namespace ChronosClient.Screens.Windows
 {
@@ -20,7 +21,7 @@ namespace ChronosClient.Screens.Windows
     /// Interaction logic for DashboardScreen.xaml
     /// </summary>
     public partial class DashboardScreen : Window
-    {
+    { 
         public DashboardScreen()
         {
             InitializeComponent();
@@ -30,7 +31,15 @@ namespace ChronosClient.Screens.Windows
         private void new_plan_button_Click(object sender, RoutedEventArgs e)
         {
             NewPlanScreen planScreen = new NewPlanScreen();
-            planScreen.ShowDialog();
+            if (!planScreen.ShowDialog() == true)
+            {
+                
+            }
         }
+
+        //private void profile_button_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
     }
 }
