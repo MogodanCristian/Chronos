@@ -20,6 +20,7 @@ namespace ChronosClient.Components
     /// </summary>
     public partial class BucketComponent : UserControl
     {
+
         public static readonly DependencyProperty BucketTitleProperty =
             DependencyProperty.Register("BucketTitle", typeof(string), typeof(BucketComponent), new PropertyMetadata(string.Empty));
 
@@ -32,6 +33,11 @@ namespace ChronosClient.Components
         public BucketComponent()
         {
             InitializeComponent();
+        }
+
+        private void add_task_Click(object sender, RoutedEventArgs e)
+        {
+            taskView.AddTask("Combinatie numa ca mai mica");
         }
     }
 }
