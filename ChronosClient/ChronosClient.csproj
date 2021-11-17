@@ -127,6 +127,15 @@
     <Compile Include="Views\BucketView.xaml.cs">
       <DependentUpon>BucketView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PlanItemWrapPanelView.xaml.cs">
+      <DependentUpon>PlanItemWrapPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\RegisterScreen.xaml.cs">
+      <DependentUpon>RegisterScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaskView.xaml.cs">
+      <DependentUpon>TaskView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\BucketComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BucketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

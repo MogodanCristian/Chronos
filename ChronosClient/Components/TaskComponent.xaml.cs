@@ -20,9 +20,17 @@ namespace ChronosClient.Components
     /// </summary>
     public partial class TaskComponent : UserControl
     {
+        public static readonly DependencyProperty TaskTitleProperty =
+            DependencyProperty.Register("TaskTitle", typeof(string), typeof(TaskComponent), new PropertyMetadata(string.Empty));
         public TaskComponent()
         {
             InitializeComponent();
+        }
+
+        public string TaskTitle
+        {
+            get { return (string)GetValue(TaskTitleProperty); }
+            set { SetValue(TaskTitleProperty, value); }
         }
     }
 }

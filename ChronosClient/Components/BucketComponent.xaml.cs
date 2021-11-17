@@ -35,6 +35,9 @@ namespace ChronosClient.Components
             InitializeComponent();
         }
 
-
+        private void add_task_Click(object sender, RoutedEventArgs e)
+        {
+            taskView.AddTask("Combinatie numa ca mai mica");
+        }
     }
 }

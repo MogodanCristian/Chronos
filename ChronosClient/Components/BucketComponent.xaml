@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChronosClient.Components"
+             xmlns:views="clr-namespace:ChronosClient.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
-        <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15" >
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">    
+    <Grid x:Name="bucket_grid">
+        <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
             <StackPanel Margin="5">
-                <Label x:Name="bucket_title" Content="{Binding BucketTitle}" Margin="0,0,0,20" HorizontalAlignment="Center"></Label>
-                <Button x:Name="add_task" Content="Add New Task" Width="100" Height="20" Margin="0,0,0,20"></Button>
+                 <Label x:Name="bucket_title" Content="{Binding BucketTitle}" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                 <Button x:Name="add_task" Content="Add New Task" Width="100" Height="20" Margin="0,0,0,20" Click="add_task_Click" />
+                <views:TaskView x:Name="taskView"/>
             </StackPanel>
         </Border>
     </Grid>
