@@ -1,0 +1,25 @@
+﻿<Window x:Class="ChronosClient.Screens.Windows.Popups.NewTaskPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChronosClient.Screens.Windows.Popups"
+        mc:Ignorable="d"
+        Title="NewTaskPopup" Height="450" Width="800">
+    <Grid>
+        <Label Content="New Task" FontSize="22" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Title" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="125,150,0,0" VerticalAlignment="Top"/>
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="125,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Priority" HorizontalAlignment="Left" Margin="125,250,0,0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="task_name"  HorizontalAlignment="Left" Height="23" Margin="200,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="task_description" HorizontalAlignment="Left" Height="23" Margin="200,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="task_end_date" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="task_priority" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="100"/>
+
+        <Button x:Name="create_task" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Create Task" Margin="0,0,0,30" Width="75" Height="25" Click="create_task_Click"/>
+
+    </Grid>
+</Window>

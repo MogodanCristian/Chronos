@@ -18,7 +18,19 @@
                     <Label x:Name="task_name" Content="{Binding TaskTitle}" HorizontalAlignment="Center"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label Name="assigned_to" Content="Assigned To" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_description" Content="{Binding TaskDescription}" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label x:Name="task_start_date" Content="{Binding TaskStartDate}" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label x:Name="task_end_date" Content="{Binding TaskEndDate}" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label x:Name="task_priority" Content="{Binding TaskPriority}" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Name="assigned_to" Content="{Binding TaskAssignedTo}" HorizontalAlignment="Center"></Label>
                 </StackPanel>
             </StackPanel>
         </Border>

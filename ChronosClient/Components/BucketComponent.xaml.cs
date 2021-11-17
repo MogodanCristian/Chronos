@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChronosClient.Screens.Windows.Popups;
 
 namespace ChronosClient.Components
 {
@@ -37,7 +38,11 @@ namespace ChronosClient.Components
 
         private void add_task_Click(object sender, RoutedEventArgs e)
         {
-            taskView.AddTask("Combinatie numa ca mai mica");
+            NewTaskPopup newTaskPopup = new NewTaskPopup();
+            if (!newTaskPopup.ShowDialog() == true)
+            {
+                taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority);
+            }
         }
     }
 }

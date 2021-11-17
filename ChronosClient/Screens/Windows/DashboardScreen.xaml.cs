@@ -23,6 +23,16 @@ namespace ChronosClient.Screens.Windows
     /// </summary>
     public partial class DashboardScreen : Window
     {
+        DashboardHomeScreen dashboardHomeScreen;
+        UserAuthResponse userAuth = new UserAuthResponse
+        {
+            UserId = 14,
+            FirstName = "Florin",
+            LastName = "Cabaua",
+            DateOfBirth = DateTime.Parse("2000-07-24T00:00:00"),
+            CreatedAt = DateTime.Parse("2021-11-15T19:41:47.33"),
+            Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM"
+        };
         public DashboardScreen(UserAuthResponse userAuth) : base()
         {
             //dashboardFrame.Content = new DashboardHomeScreen(userAuth);
@@ -30,22 +40,22 @@ namespace ChronosClient.Screens.Windows
         public DashboardScreen()
         {
             InitializeComponent();
-            UserAuthResponse userAuth = new UserAuthResponse
-            {
-                UserId = 14,
-                FirstName = "Florin",
-                LastName = "Cabaua",
-                DateOfBirth = DateTime.Parse("2000-07-24T00:00:00"),
-                CreatedAt = DateTime.Parse("2021-11-15T19:41:47.33"),
-                Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM"
-            };
-            dashboardFrame.Content = new DashboardHomeScreen(userAuth);
+            dashboardHomeScreen = new DashboardHomeScreen(userAuth);
+            dashboardFrame.Content = dashboardHomeScreen;
         }
 
         private void new_plan_button_Click(object sender, RoutedEventArgs e)
         {
             NewPlanScreen planScreen = new NewPlanScreen();
-            planScreen.ShowDialog();
+            if (!planScreen.ShowDialog() == true)
+            {
+                dashboardHomeScreen.initializePlans(userAuth.UserId);
+            }
+        }
+
+        private void profile_button_Click(object sender, RoutedEventArgs e)
+        {
+            dashboardFrame.Content = dashboardHomeScreen;
         }
     }
 }

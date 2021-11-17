@@ -33,5 +33,12 @@ namespace ChronosClient.Views
                 Margin = new Thickness(10)
             });
         }
+        public void clearBuckets()
+        {
+            if(buckets.Children.Count > 0)
+            {
+                buckets.Children.Clear();
+            }
+        }
     }
 }

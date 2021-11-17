@@ -36,5 +36,13 @@ namespace ChronosClient.Views
             });
         }
 
+        public void clearPlanItems()
+        {
+            if(WrapPanelPlanItems.Children.Count > 0)
+            {
+                WrapPanelPlanItems.Children.Clear();
+            }
+        }
+
     }
 }

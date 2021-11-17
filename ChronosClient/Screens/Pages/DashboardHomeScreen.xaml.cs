@@ -26,6 +26,7 @@ namespace ChronosClient.Screens.Pages
     public partial class DashboardHomeScreen : Page
     {
         static HttpClient client = new HttpClient();
+        static bool clientExists = false;
 
         static async Task<HttpResponseMessage> GetPlansForUserAsync(int UserId)
         {
@@ -50,8 +51,9 @@ namespace ChronosClient.Screens.Pages
             }
         }
 
-        private async void initializePlans(int UserId)
+        public async void initializePlans(int UserId)
         {
+            PlanItemsWrapPanel.clearPlanItems();
             List<Plan> planItems = await GetPlanItems(UserId);
             if (planItems != null)
             {
