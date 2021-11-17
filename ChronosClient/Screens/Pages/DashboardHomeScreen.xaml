@@ -10,7 +10,7 @@
       Title="DashboardHomeScreen">
 
     <Grid>
-        <TextBlock Margin="0,30,0,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="246"/>
+        <TextBlock x:Name="welcome_textblock" Margin="0,30,0,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="246"/>
         <ScrollViewer x:Name="PlansScrollView" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,60,0,0">
             <views:PlanItemWrapPanelView x:Name="PlanItemsWrapPanel"/>
         </ScrollViewer>
