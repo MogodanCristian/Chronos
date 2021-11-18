@@ -247,10 +247,42 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\add.jpg" />
-    <Resource Include="Resources\profile.jpg" />
+    <Resource Include="Resources\Letters\a.png" />
+    <Resource Include="Resources\Letters\b.png" />
+    <Resource Include="Resources\Letters\c.png" />
+    <Resource Include="Resources\Letters\d.png" />
+    <Resource Include="Resources\Letters\e.png" />
+    <Resource Include="Resources\Letters\f.png" />
+    <Resource Include="Resources\Letters\g.png" />
+    <Resource Include="Resources\Letters\h.png" />
+    <Resource Include="Resources\Letters\i.png" />
+    <Resource Include="Resources\Letters\j.png" />
+    <Resource Include="Resources\Letters\k.png" />
+    <Resource Include="Resources\Letters\l.png" />
+    <Resource Include="Resources\Letters\m.png" />
+    <Resource Include="Resources\Letters\n.png" />
+    <Resource Include="Resources\Letters\o.png" />
+    <Resource Include="Resources\Letters\p.png" />
+    <Resource Include="Resources\Letters\q.png" />
+    <Resource Include="Resources\Letters\r.png" />
+    <Resource Include="Resources\Letters\s.png" />
+    <Resource Include="Resources\Letters\t.png" />
+    <Resource Include="Resources\Letters\u.png" />
+    <Resource Include="Resources\Letters\v.png" />
+    <Resource Include="Resources\Letters\w.png" />
+    <Resource Include="Resources\Letters\x.png" />
+    <Resource Include="Resources\Letters\y.png" />
+    <Resource Include="Resources\Letters\z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Letters\Balb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
