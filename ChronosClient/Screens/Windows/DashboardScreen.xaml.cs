@@ -65,6 +65,7 @@ namespace ChronosClient.Screens.Windows
 
         public DashboardScreen(UserAuthResponse userAuth)
         {
+            this.userAuth = userAuth;
             InitializeComponent();
             dashboardHomeScreen = new DashboardHomeScreen(userAuth);
             dashboardFrame.Content = dashboardHomeScreen;
