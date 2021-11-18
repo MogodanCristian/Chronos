@@ -7,6 +7,6 @@
              xmlns:components="clr-namespace:ChronosClient.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <WrapPanel Name="buckets">
+    <WrapPanel Name="buckets" Background="#FF2C2F33">
     </WrapPanel>
 </UserControl>

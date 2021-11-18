@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Chronos" Height="450" Width="800">
     <Grid>
-        <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="Main" NavigationUIVisibility="Hidden" Foreground="#FF2C2F33"/>
     </Grid>
 </Window>

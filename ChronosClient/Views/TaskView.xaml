@@ -6,6 +6,6 @@
              xmlns:local="clr-namespace:ChronosClient.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <WrapPanel x:Name="tasks" Orientation="Vertical">
+    <WrapPanel x:Name="tasks" Orientation="Vertical" Background="#FF2C2F33">
     </WrapPanel>
 </UserControl>

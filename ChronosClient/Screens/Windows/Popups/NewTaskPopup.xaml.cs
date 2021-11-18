@@ -19,6 +19,7 @@ namespace ChronosClient.Screens.Windows.Popups
     /// </summary>
     public partial class NewTaskPopup : Window
     {
+
         public NewTaskPopup()
         {
             InitializeComponent();

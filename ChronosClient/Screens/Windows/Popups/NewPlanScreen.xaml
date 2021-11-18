@@ -6,15 +6,15 @@
       xmlns:local="clr-namespace:ChronosClient.Screens.Windows.Popups"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="700"
-      Title="NewPlan" SizeToContent="WidthAndHeight">
+      Title="New Plan" SizeToContent="WidthAndHeight">
 
-    <Grid Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Width="700">
-        <Label Content="New Plan" HorizontalAlignment="Left" Margin="284,20,0,0" VerticalAlignment="Top" Height="49" Width="121" FontSize="24"/>
+    <Grid Background="#FF2C2F33" Width="700">
+        <Label Content="New Plan" HorizontalAlignment="Left" Margin="284,20,0,0" VerticalAlignment="Top" Height="49" Width="121" FontSize="24" Foreground="White"/>
         <TextBox x:Name="inserted_name" HorizontalAlignment="Left" Height="38" Margin="153,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="531" FontSize="24"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="39,77,0,0" VerticalAlignment="Top" Height="49" Width="83" FontSize="24"/>
-        <Button x:Name="create_button" Content="Create Plan" Width="134" Height="49" FontSize="20" Margin="281,196,278.6,25.4" Click="create_button_Click"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="39,77,0,0" VerticalAlignment="Top" Height="49" Width="83" FontSize="24" Foreground="White"/>
+        <Button x:Name="create_button" Content="Create Plan" Width="134" Height="49" FontSize="20" Margin="281,196,278.6,25.4" Click="create_button_Click" Foreground="White" Background="#FF404EED"/>
         <TextBox x:Name="description_inserted" HorizontalAlignment="Left" Height="38" Margin="153,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="531" FontSize="24"/>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Height="49" Width="138" FontSize="24"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Height="49" Width="138" FontSize="24" Foreground="White"/>
 
 
     </Grid>

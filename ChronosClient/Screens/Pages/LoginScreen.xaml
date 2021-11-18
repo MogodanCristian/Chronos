@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChronosClient.Screens.Pages"
         mc:Ignorable="d"
-        Title="LoginScreen" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="305,291,0,0" VerticalAlignment="Top" Width="207" Click="LoginButton_Click"/>
-        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="305,137,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="207" TextAlignment="Center"/>
-        <CheckBox x:Name="KeepMeLoggedIn" Content="Keep me logged in&#xD;&#xA;" HorizontalAlignment="Left" Margin="305,237,0,0" VerticalAlignment="Top" Height="20" Width="120"/>
-        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="305,196,0,0" VerticalAlignment="Top" Width="207" Height="23"/>
-        <Label Name="GoToRegisterLabel" Content="Not yet registered? Sign up here." HorizontalAlignment="Left" Margin="305,372,0,0" VerticalAlignment="Top" Width="207" MouseLeftButtonDown="GoToRegisterLabel_MouseLeftButtonDown"/>
+        Title="Login" Height="250" Width="400">
+    <Grid Background="#FF2C2F33">
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="100,190,0,0" VerticalAlignment="Top" Width="200" Click="LoginButton_Click" Background="#FF404EED" Foreground="White"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" TextAlignment="Center"/>
+        <CheckBox x:Name="KeepMeLoggedIn" Content="Keep me logged in&#xD;&#xA;" HorizontalAlignment="Left" Margin="144,147,0,0" VerticalAlignment="Top" Height="20" Width="121" HorizontalContentAlignment="Center" Foreground="White" FontStyle="Italic"/>
+        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="119,110,0,0" VerticalAlignment="Top" Width="241" Height="23"/>
+        <Label Name="GoToRegisterLabel" Content="Not yet registered? Sign up here." HorizontalAlignment="Left" Margin="100,214,0,0" VerticalAlignment="Top" Width="200" MouseLeftButtonDown="GoToRegisterLabel_MouseLeftButtonDown" HorizontalContentAlignment="Center" Foreground="White" FontStyle="Italic"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="58,76,0,0" VerticalAlignment="Top" Width="45" RenderTransformOrigin="-0.394,0.645" Foreground="White"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="49,107,0,0" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.228,-0.871" Foreground="White"/>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" Width="90" FontStyle="Italic" FontSize="22" Foreground="White"/>
 
     </Grid>
 </Page>
