@@ -22,11 +22,23 @@ namespace ChronosClient.Components
     /// </summary>
     public partial class PlanItemCard : UserControl
     {
+        public static readonly DependencyProperty PlanIdProperty =
+                  DependencyProperty.Register("PlanId", typeof(int), typeof(PlanItemCard), new PropertyMetadata(0));
+
         public static readonly DependencyProperty PlanTitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty PlanCreatedAtProperty =
             DependencyProperty.Register("CreatedAt", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty PlanTokenProperty =
+          DependencyProperty.Register("Token", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
+
+        public int PlanId
+        {
+            get { return (int)GetValue(PlanIdProperty); }
+            set { SetValue(PlanIdProperty, value); }
+        }
 
         public string Title
         {
@@ -40,6 +52,12 @@ namespace ChronosClient.Components
             set { SetValue(PlanCreatedAtProperty, value); }
         }
 
+        public string Token
+        {
+            get { return (string)GetValue(PlanTokenProperty); }
+            set { SetValue(PlanTokenProperty, value); }
+        }
+
         public PlanItemCard()
         {
             InitializeComponent();
@@ -47,8 +65,8 @@ namespace ChronosClient.Components
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var dashboardScreen = Application.Current.MainWindow as DashboardScreen;
-            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(4));
+            var dashboardScreen = (DashboardScreen)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(Token, PlanId));
         }
     }
 }

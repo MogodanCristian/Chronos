@@ -30,17 +30,19 @@ namespace ChronosClient.Screens.Windows.Popups
     {
         static HttpClient client = new HttpClient();
         static bool clientExists = false;
+        UserAuthResponse user;
 
-        public NewPlanScreen()
+
+        public NewPlanScreen(UserAuthResponse userLoggedIn)
         {
             InitializeComponent();
-            if(!clientExists)
+            user = userLoggedIn;
+            if (!clientExists)
             {
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(user.Token);
                 clientExists = true;
             }
         }
@@ -61,8 +63,7 @@ namespace ChronosClient.Screens.Windows.Popups
                     Description = description_inserted.Text
                 };
 
-                var response = await CreatePlanAsync(14, plan);
-
+                var response = await CreatePlanAsync(user.UserId, plan);
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     MessageBox.Show("Cannot create plan!", "Error");

@@ -2,6 +2,7 @@
 using ChronosClient.Screens.Pages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,29 @@ namespace ChronosClient.Screens.Windows
         public MainWindow()
         {
             InitializeComponent();
-            Main.Content = new LoginScreen();
+            if (!checkIfUserLoggedIn())
+            {
+                Main.Content = new LoginScreen();
+            }
+        }
+
+        private bool checkIfUserLoggedIn()
+        {
+            string destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jwt");
+            if(!File.Exists(destPath)) {
+                return false;
+            }
+            string jwt = System.IO.File.ReadAllText(destPath);
+            if (jwt != "")
+            {
+                DashboardScreen dashboardScreen = new DashboardScreen(jwt);
+                dashboardScreen.Show();
+
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.Close();
+                return true;
+            }
+            return false;
         }
     }
 }

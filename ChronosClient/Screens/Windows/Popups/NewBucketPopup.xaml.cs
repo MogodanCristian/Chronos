@@ -26,14 +26,15 @@ namespace ChronosClient.Screens.Windows.Popups
     public partial class NewBucketPopup : Window
     {
         static HttpClient client = new HttpClient();
+        int planSelectedId;
         public string m_BucketName { get; set; }
-        public NewBucketPopup()
+        public NewBucketPopup(string token, int planId)
         {
             InitializeComponent();
+            planSelectedId = planId;
             client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
@@ -57,7 +58,7 @@ namespace ChronosClient.Screens.Windows.Popups
                 {
                     Title = m_BucketName
                 };
-                var response = await CreateBucketAsync(4, bucket);
+                var response = await CreateBucketAsync(planSelectedId, bucket);
 
                 string mesg = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == HttpStatusCode.BadRequest)

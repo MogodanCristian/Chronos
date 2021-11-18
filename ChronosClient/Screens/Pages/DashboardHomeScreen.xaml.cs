@@ -26,7 +26,7 @@ namespace ChronosClient.Screens.Pages
     public partial class DashboardHomeScreen : Page
     {
         static HttpClient client = new HttpClient();
-        static bool clientExists = false;
+        UserAuthResponse user;
 
         static async Task<HttpResponseMessage> GetPlansForUserAsync(int UserId)
         {
@@ -37,6 +37,7 @@ namespace ChronosClient.Screens.Pages
         {
             try
             {
+                user = userAuth;
                 InitializeComponent();
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -59,7 +60,7 @@ namespace ChronosClient.Screens.Pages
             {
                 foreach (Plan plan in planItems)
                 {
-                    PlanItemsWrapPanel.addPlanItem(plan.Title, plan.CreatedAt.ToString().Substring(0,10));
+                    PlanItemsWrapPanel.addPlanItem(plan.PlanId, plan.Title, plan.CreatedAt.ToString().Substring(0, 10), user.Token);
                 }
             }
         }
