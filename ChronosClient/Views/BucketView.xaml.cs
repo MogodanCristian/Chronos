@@ -25,11 +25,12 @@ namespace ChronosClient.Views
         {
             InitializeComponent();
         }
-        public void AddBucket(string bucketTitle)
+        public void AddBucket(string bucketTitle, int bucketId)
         {
             buckets.Children.Add(new BucketComponent
             {
                 BucketTitle = bucketTitle,
+                BucketId = bucketId,
                 Margin = new Thickness(10)
             });
         }

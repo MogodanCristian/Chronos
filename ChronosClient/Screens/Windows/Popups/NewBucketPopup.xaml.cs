@@ -27,15 +27,20 @@ namespace ChronosClient.Screens.Windows.Popups
     {
         static HttpClient client = new HttpClient();
         int planSelectedId;
+        static bool isClient = false;
         public string m_BucketName { get; set; }
         public NewBucketPopup(string token, int planId)
         {
             InitializeComponent();
             planSelectedId = planId;
-            client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+            if (!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                isClient = true;
+            }
         }
 
         static async Task<HttpResponseMessage> CreateBucketAsync(int PlanId, BucketCreateModel bucket)

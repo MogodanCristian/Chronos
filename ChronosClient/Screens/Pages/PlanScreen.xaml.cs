@@ -27,6 +27,7 @@ namespace ChronosClient.Screens.Pages
     {
         static HttpClient client = new HttpClient();
         static bool clientExists = false;
+        public static BucketList m_buckets;
         int PlanSelectedId;
         string jwtToken;
 
@@ -54,7 +55,8 @@ namespace ChronosClient.Screens.Pages
             {
                 foreach (Bucket bucket in bucketItems)
                 {
-                    BucketPanelView.AddBucket(bucket.Title);
+                    BucketPanelView.AddBucket(bucket.Title, bucket.BucketID);
+                    m_buckets.Add(bucket);
                 }
             }
         }
@@ -70,6 +72,8 @@ namespace ChronosClient.Screens.Pages
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
                 clientExists = true;
+                m_buckets = new BucketList();
+                m_buckets.Changed += new ChangedEventHandler(BucketsChanged);
             }
             initializeBuckets(PlanSelectedId);
         }
@@ -82,6 +86,10 @@ namespace ChronosClient.Screens.Pages
                 initializeBuckets(PlanSelectedId);
             }
 
+        }
+        private void BucketsChanged(object sender, EventArgs e)
+        {
+            initializeBuckets(PlanSelectedId);
         }
 
     }

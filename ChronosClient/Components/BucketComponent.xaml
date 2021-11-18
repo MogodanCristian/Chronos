@@ -11,6 +11,11 @@
     <Grid x:Name="bucket_grid">
         <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
             <StackPanel Margin="5">
+                <Menu Background="White" HorizontalAlignment="Right" Margin="0,0,0,20">
+                    <MenuItem Header="..."  FontWeight="Bold" HorizontalAlignment="Right" >
+                        <MenuItem x:Name="delete_bucket" Header="Delete Bucket" FontWeight="Medium" Click="delete_bucket_Click"/>
+                    </MenuItem>
+                </Menu>
                 <Label x:Name="bucket_title" Content="{Binding BucketTitle}" Margin="0,0,0,20" HorizontalAlignment="Center"/>
                 <Button x:Name="add_task" Content="Add New Task" Width="100" Height="20" Margin="0,0,0,20" Click="add_task_Click" />
                 <views:TaskView x:Name="taskView"/>
