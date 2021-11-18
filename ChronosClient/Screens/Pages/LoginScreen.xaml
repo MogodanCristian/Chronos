@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="305,291,0,0" VerticalAlignment="Top" Width="207" Click="LoginButton_Click"/>
         <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="305,137,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="207" TextAlignment="Center"/>
-        <CheckBox x:Name="KeepMeLoggedIn" Content="Keep me logged in&#xD;&#xA;" HorizontalAlignment="Left" Margin="305,237,0,0" VerticalAlignment="Top" Height="20" Width="120" Checked="KeepMeLoggedIn_Checked"/>
+        <CheckBox x:Name="KeepMeLoggedIn" Content="Keep me logged in&#xD;&#xA;" HorizontalAlignment="Left" Margin="305,237,0,0" VerticalAlignment="Top" Height="20" Width="120"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="305,196,0,0" VerticalAlignment="Top" Width="207" Height="23"/>
         <Label Name="GoToRegisterLabel" Content="Not yet registered? Sign up here." HorizontalAlignment="Left" Margin="305,372,0,0" VerticalAlignment="Top" Width="207" MouseLeftButtonDown="GoToRegisterLabel_MouseLeftButtonDown"/>
 

@@ -27,10 +27,12 @@ namespace ChronosClient.Screens.Pages
     {
         static HttpClient client = new HttpClient();
         static bool clientExists = false;
+        int PlanSelectedId;
+        string jwtToken;
 
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
-            HttpResponseMessage response = await client.GetAsync($"buckets/{4}");
+            HttpResponseMessage response = await client.GetAsync($"buckets/{PlanId}");
             return response;
         }
         private async Task<List<Bucket>> GetBucketItems(int PlanId)
@@ -56,29 +58,29 @@ namespace ChronosClient.Screens.Pages
                 }
             }
         }
-        public PlanScreen(int PlanId)
+        public PlanScreen(string token, int PlanId)
         {
+            PlanSelectedId = PlanId;
+            jwtToken = token;
             if(!clientExists)
             {
                 InitializeComponent();
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
                 clientExists = true;
             }
-            initializeBuckets(PlanId);
+            initializeBuckets(PlanSelectedId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NewBucketPopup newBucketPopup = new NewBucketPopup();
+            NewBucketPopup newBucketPopup = new NewBucketPopup(jwtToken,PlanSelectedId);
             if (!newBucketPopup.ShowDialog() == true)
             {
-                initializeBuckets(4);
+                initializeBuckets(PlanSelectedId);
             }
-
         }
 
     }

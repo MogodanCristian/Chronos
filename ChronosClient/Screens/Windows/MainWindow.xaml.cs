@@ -25,7 +25,26 @@ namespace ChronosClient.Screens.Windows
         public MainWindow()
         {
             InitializeComponent();
-            Main.Content = new LoginScreen();
+            if(!checkIfUserLoggedIn())
+            {
+                Main.Content = new LoginScreen();
+            }
+        }
+
+        private bool checkIfUserLoggedIn()
+        {
+            string destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jwt");
+            string jwt = System.IO.File.ReadAllText(destPath);
+            if(jwt != "")
+            {
+                DashboardScreen dashboardScreen = new DashboardScreen(jwt);
+                dashboardScreen.Show();
+
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow.Close();
+                return true;
+            }
+            return false;
         }
     }
 }

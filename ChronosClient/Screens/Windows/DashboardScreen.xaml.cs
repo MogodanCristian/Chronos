@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChronosClient.Models;
+using ChronosClient.Models.Auth;
 using ChronosClient.Screens.Pages;
 using ChronosClient.Screens.Windows.Popups;
 
@@ -23,33 +26,68 @@ namespace ChronosClient.Screens.Windows
     /// </summary>
     public partial class DashboardScreen : Window
     {
+        static HttpClient client = new HttpClient();
         DashboardHomeScreen dashboardHomeScreen;
-        UserAuthResponse userAuth = new UserAuthResponse
+        UserAuthResponse userAuth;
+
+        static async Task<HttpResponseMessage> LoginJwtAsync(AuthenticateJwtRequest userAuthJwtReq)
         {
-            UserId = 14,
-            FirstName = "Florin",
-            LastName = "Cabaua",
-            DateOfBirth = DateTime.Parse("2000-07-24T00:00:00"),
-            CreatedAt = DateTime.Parse("2021-11-15T19:41:47.33"),
-            Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM"
-        };
-        public DashboardScreen(UserAuthResponse userAuth) : base()
-        {
-            //dashboardFrame.Content = new DashboardHomeScreen(userAuth);
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                "auth/login/jwt", userAuthJwtReq);
+
+            return response;
         }
-        public DashboardScreen()
+
+        private async Task<UserAuthResponse> SetLoggedInUserAuthResponse(string jwt)
+        {
+            AuthenticateJwtRequest userAuthJwtReq = new AuthenticateJwtRequest
+            {
+                jwt = jwt
+            };
+            var response = await LoginJwtAsync(userAuthJwtReq);
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return null;
+            }
+            UserAuthResponse userLoggedIn = await response.Content.ReadAsAsync<UserAuthResponse>();
+            return userLoggedIn;
+        }
+
+        private async void initializeUserLoggedIn(string jwt)
+        {
+            userAuth = await SetLoggedInUserAuthResponse(jwt);
+            if(userAuth!=null)
+            {
+                dashboardHomeScreen = new DashboardHomeScreen(userAuth);
+                dashboardFrame.Content = dashboardHomeScreen;
+            }
+        }
+
+        public DashboardScreen(UserAuthResponse userAuth)
         {
             InitializeComponent();
             dashboardHomeScreen = new DashboardHomeScreen(userAuth);
             dashboardFrame.Content = dashboardHomeScreen;
         }
 
+        public DashboardScreen(string jwt)
+        {
+            InitializeComponent();
+            client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            initializeUserLoggedIn(jwt);
+        }
+
         private void new_plan_button_Click(object sender, RoutedEventArgs e)
         {
-            NewPlanScreen planScreen = new NewPlanScreen();
-            if (!planScreen.ShowDialog() == true)
+            if(userAuth!=null)
             {
-                dashboardHomeScreen.initializePlans(userAuth.UserId);
+                NewPlanScreen planScreen = new NewPlanScreen(userAuth);
+                if (!planScreen.ShowDialog() == true)
+                {
+                    dashboardHomeScreen.initializePlans(userAuth.UserId);
+                }
             }
         }
 

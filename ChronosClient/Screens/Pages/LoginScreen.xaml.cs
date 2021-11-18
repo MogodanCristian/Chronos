@@ -17,6 +17,7 @@ using System.Net;
 using ChronosClient.Models;
 using Newtonsoft.Json;
 using ChronosClient.Screens.Windows;
+using System.IO;
 
 namespace ChronosClient.Screens.Pages
 {
@@ -32,8 +33,6 @@ namespace ChronosClient.Screens.Pages
             client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
         static async Task<HttpResponseMessage> LoginAsync(UserAuth user)
@@ -43,12 +42,6 @@ namespace ChronosClient.Screens.Pages
 
             return response;
         }
-
-        private void KeepMeLoggedIn_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // check email and password empty
@@ -70,8 +63,12 @@ namespace ChronosClient.Screens.Pages
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     userAuthResponse = await response.Content.ReadAsAsync<UserAuthResponse>();
-                    //MessageBox.Show("User authenticated successfully!\n" + userAuthResponse.Token);
-
+                    if (KeepMeLoggedIn.IsChecked == true)
+                    {
+                        // store the JWT.
+                        string destPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jwt");
+                        File.WriteAllText(destPath, userAuthResponse.Token);
+                    }
                     DashboardScreen dashboardScreen = new DashboardScreen(userAuthResponse);
                     dashboardScreen.Show();
 
