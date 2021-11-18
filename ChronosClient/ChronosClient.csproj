@@ -116,6 +116,7 @@
     <Compile Include="Models\Auth\UserAuthResponse.cs" />
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BucketCreateModel.cs" />
+    <Compile Include="Models\BucketList.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">

@@ -15,8 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChronosClient.Components;
 using ChronosClient.Models;
 using ChronosClient.Screens.Windows.Popups;
+using static ChronosClient.Components.BucketComponent;
+using static ChronosClient.Models.BucketList;
 
 namespace ChronosClient.Screens.Pages
 {
@@ -27,7 +30,7 @@ namespace ChronosClient.Screens.Pages
     {
         static HttpClient client = new HttpClient();
         static bool clientExists = false;
-
+        public static BucketList m_buckets;
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
             HttpResponseMessage response = await client.GetAsync($"buckets/{4}");
@@ -52,7 +55,8 @@ namespace ChronosClient.Screens.Pages
             {
                 foreach (Bucket bucket in bucketItems)
                 {
-                    BucketPanelView.AddBucket(bucket.Title);
+                    BucketPanelView.AddBucket(bucket.Title,bucket.BucketID);
+                    m_buckets.Add(bucket);
                 }
             }
         }
@@ -67,9 +71,12 @@ namespace ChronosClient.Screens.Pages
                 string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
                 clientExists = true;
+                m_buckets = new BucketList();
+                m_buckets.Changed += new ChangedEventHandler(BucketsChanged);
             }
             initializeBuckets(PlanId);
         }
+       
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -78,8 +85,10 @@ namespace ChronosClient.Screens.Pages
             {
                 initializeBuckets(4);
             }
-
         }
-
+        private void BucketsChanged(object sender, EventArgs e)
+        {
+            initializeBuckets(4);
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChronosClient.Models;
+using ChronosClient.Screens.Pages;
 using ChronosClient.Screens.Windows.Popups;
 
 namespace ChronosClient.Components
@@ -25,15 +29,48 @@ namespace ChronosClient.Components
         public static readonly DependencyProperty BucketTitleProperty =
             DependencyProperty.Register("BucketTitle", typeof(string), typeof(BucketComponent), new PropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty BucketIdProperty =
+            DependencyProperty.Register("BucketId", typeof(int), typeof(BucketComponent), new PropertyMetadata(0));
+
         public string BucketTitle
         {
             get { return (string)GetValue(BucketTitleProperty); }
             set { SetValue(BucketTitleProperty, value); }
         }
 
+        public int BucketId
+        {
+            get { return (int)GetValue(BucketIdProperty); }
+            set { SetValue(BucketIdProperty, value); }
+        }
+
+        static HttpClient client = new HttpClient();
+        static bool isClient = false;
         public BucketComponent()
         {
             InitializeComponent();
+            if(!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                isClient = true;
+            }
+          
+        }
+
+        static async Task<HttpResponseMessage> DeleteBucketAsync(Bucket bucket)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = new StringContent("{ BucketID:" + bucket.BucketID.ToString() + "}", Encoding.UTF8, "application/json"),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("https://chronosapi.azurewebsites.net/api/buckets")
+            };
+            HttpResponseMessage message = await client.SendAsync(request);
+            return message;
         }
 
         private void add_task_Click(object sender, RoutedEventArgs e)
@@ -43,6 +80,16 @@ namespace ChronosClient.Components
             {
                 taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority);
             }
+        }
+        public class DeletedEventArgs : EventArgs
+        {
+            public string Message { get; set; }
+        }
+        private async void delete_bucket_Click(object sender, RoutedEventArgs e)
+        {
+            Bucket bucket = new Bucket { BucketID = BucketId };
+            var response = await DeleteBucketAsync(bucket);
+            PlanScreen.m_buckets.OnChanged(e);
         }
     }
 }

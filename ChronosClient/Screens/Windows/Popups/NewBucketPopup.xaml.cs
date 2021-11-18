@@ -26,15 +26,20 @@ namespace ChronosClient.Screens.Windows.Popups
     public partial class NewBucketPopup : Window
     {
         static HttpClient client = new HttpClient();
+        static bool isClient = false;
         public string m_BucketName { get; set; }
         public NewBucketPopup()
         {
             InitializeComponent();
-            client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+            if (!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                isClient = true;
+            }
         }
 
         static async Task<HttpResponseMessage> CreateBucketAsync(int PlanId, BucketCreateModel bucket)
@@ -42,6 +47,7 @@ namespace ChronosClient.Screens.Windows.Popups
             HttpResponseMessage httpResponse = await client.PostAsJsonAsync($"buckets/{PlanId}", bucket);
             return httpResponse;
         }
+            
 
         private async void create_bucket_Click(object sender, RoutedEventArgs e)
         {
