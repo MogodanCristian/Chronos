@@ -31,7 +31,8 @@ namespace ChronosClient.Components
 
         public static readonly DependencyProperty BucketIdProperty =
             DependencyProperty.Register("BucketId", typeof(int), typeof(BucketComponent), new PropertyMetadata(0));
-
+     
+        
         public string BucketTitle
         {
             get { return (string)GetValue(BucketTitleProperty); }
@@ -46,16 +47,21 @@ namespace ChronosClient.Components
 
         static HttpClient client = new HttpClient();
         static bool isClient = false;
-        public BucketComponent()
+        int UserId;
+        string jwtToken;
+
+
+        public BucketComponent(int UserId, string token)
         {
             InitializeComponent();
+            this.UserId = UserId;
+            jwtToken = token;
             if (!isClient)
             {
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE0IiwibmJmIjoxNjM3MTY0MzYwLCJleHAiOjE2Mzc3NjkxNjAsImlhdCI6MTYzNzE2NDM2MH0.T7tBkidkzFXAmqwQxYmqT-N_5Xc-vYM81aDBcg7KLiM";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
                 isClient = true;
             }
 

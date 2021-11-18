@@ -25,9 +25,9 @@ namespace ChronosClient.Views
         {
             InitializeComponent();
         }
-        public void AddBucket(string bucketTitle, int bucketId)
+        public void AddBucket(string bucketTitle, int bucketId, int userId, string token)
         {
-            buckets.Children.Add(new BucketComponent
+            buckets.Children.Add(new BucketComponent(userId, token)
             {
                 BucketTitle = bucketTitle,
                 BucketId = bucketId,

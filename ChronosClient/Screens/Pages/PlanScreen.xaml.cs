@@ -30,6 +30,7 @@ namespace ChronosClient.Screens.Pages
         public static BucketList m_buckets;
         int PlanSelectedId;
         string jwtToken;
+        int UserId;
 
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
@@ -55,15 +56,16 @@ namespace ChronosClient.Screens.Pages
             {
                 foreach (Bucket bucket in bucketItems)
                 {
-                    BucketPanelView.AddBucket(bucket.Title, bucket.BucketID);
+                    BucketPanelView.AddBucket(bucket.Title, bucket.BucketID,UserId, jwtToken);
                     m_buckets.Add(bucket);
                 }
             }
         }
-        public PlanScreen(string token, int PlanId)
+        public PlanScreen(int UserId, string token, int PlanId)
         {
             PlanSelectedId = PlanId;
             jwtToken = token;
+            this.UserId = UserId;
             if (!clientExists)
             {
                 InitializeComponent();

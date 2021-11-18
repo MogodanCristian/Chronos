@@ -35,6 +35,8 @@ namespace ChronosClient.Components
         public static readonly DependencyProperty PlanTokenProperty =
           DependencyProperty.Register("Token", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty UserIdProperty =
+                 DependencyProperty.Register("UserId", typeof(int), typeof(PlanItemCard), new PropertyMetadata(0));
         public int PlanId
         {
             get { return (int)GetValue(PlanIdProperty); }
@@ -59,6 +61,14 @@ namespace ChronosClient.Components
             set { SetValue(PlanTokenProperty, value); }
         }
 
+        public int UserId
+        {
+            get { return (int)GetValue(UserIdProperty); }
+            set { SetValue(UserIdProperty, value); }
+        }
+
+       
+
         public PlanItemCard()
         {
             InitializeComponent();
@@ -67,7 +77,7 @@ namespace ChronosClient.Components
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dashboardScreen = (DashboardScreen)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(Token, PlanId));
+            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(UserId,Token, PlanId));
         }
 
         void Image_Loaded(object sender, RoutedEventArgs e)
