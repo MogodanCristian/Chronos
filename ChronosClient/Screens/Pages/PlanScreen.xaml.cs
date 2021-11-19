@@ -89,10 +89,14 @@ namespace ChronosClient.Screens.Pages
                 foreach (Bucket bucket in bucketItems)
                 {
                     BucketPanelView.AddBucket(bucket.Title, bucket.BucketID, UserId, jwtToken);
-                    foreach (TasksForPlanResponse task in tasksInPlan)
+                    if(tasksInPlan!=null)
                     {
-                        BucketPanelView.AddTaskToBucketComponent(task.BucketID, task);
+                        foreach (TasksForPlanResponse task in tasksInPlan)
+                        {
+                            BucketPanelView.AddTaskToBucketComponent(task.BucketID, task);
+                        }
                     }
+         
                     m_buckets.Add(bucket);
                 }
             }
