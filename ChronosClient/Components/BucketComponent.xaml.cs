@@ -79,12 +79,17 @@ namespace ChronosClient.Components
             return message;
         }
 
+        public void add_a_new_task(TasksForPlanResponse task)
+        {
+            taskView.AddTask(task.TaskId, task.Title, task.Description, task.EndDate, task.Priority.ToString());
+        }
+
         private void add_task_Click(object sender, RoutedEventArgs e)
         {
             NewTaskPopup newTaskPopup = new NewTaskPopup();
             if (!newTaskPopup.ShowDialog() == true)
             {
-                taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority);
+                //taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority);
             }
         }
         public class DeletedEventArgs : EventArgs

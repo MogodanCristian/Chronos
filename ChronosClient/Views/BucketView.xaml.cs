@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChronosClient.Models;
 
 namespace ChronosClient.Views
 {
@@ -33,6 +34,18 @@ namespace ChronosClient.Views
                 BucketId = bucketId,
                 Margin = new Thickness(10)
             });
+        }
+
+        public void AddTaskToBucketComponent(int bucketId, TasksForPlanResponse task)
+        {
+            foreach(BucketComponent bucketComponent in buckets.Children)
+            {
+                if(bucketComponent.BucketId == bucketId)
+                {
+                    bucketComponent.add_a_new_task(task);
+                    break;
+                }
+            }
         }
         public void clearBuckets()
         {
