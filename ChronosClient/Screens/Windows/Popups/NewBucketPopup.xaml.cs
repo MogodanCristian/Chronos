@@ -28,7 +28,6 @@ namespace ChronosClient.Screens.Windows.Popups
         static HttpClient client = new HttpClient();
         int planSelectedId;
         static bool isClient = false;
-        public string m_BucketName { get; set; }
         public NewBucketPopup(string token, int planId)
         {
             InitializeComponent();
@@ -58,10 +57,9 @@ namespace ChronosClient.Screens.Windows.Popups
             }
             else
             {
-                m_BucketName = bucket_name.Text;
                 BucketCreateModel bucket = new BucketCreateModel
                 {
-                    Title = m_BucketName
+                    Title = bucket_name.Text
                 };
                 var response = await CreateBucketAsync(planSelectedId, bucket);
 

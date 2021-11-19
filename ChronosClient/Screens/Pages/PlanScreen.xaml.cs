@@ -31,6 +31,7 @@ namespace ChronosClient.Screens.Pages
         int PlanSelectedId;
         string jwtToken;
         int UserId;
+        static public TaskUpdateHandler handler;
 
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
@@ -101,6 +102,8 @@ namespace ChronosClient.Screens.Pages
             PlanSelectedId = PlanId;
             jwtToken = token;
             this.UserId = UserId;
+            handler = new TaskUpdateHandler();
+            handler.Changed += new ChangedEventHandlerTasks(TasksChanged);
             if (!clientExists)
             {
                 InitializeComponent();
@@ -129,5 +132,10 @@ namespace ChronosClient.Screens.Pages
             initializeTasksInBuckets(PlanSelectedId);
         }
 
+        private void TasksChanged(object sender, EventArgs e)
+        {
+            ///fetch from database;
+            initializeTasksInBuckets(PlanSelectedId);
+        }
     }
 }

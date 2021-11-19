@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ChronosClient.Models;
 
 namespace ChronosClient.Screens.Windows.Popups
 {
@@ -19,19 +22,21 @@ namespace ChronosClient.Screens.Windows.Popups
     /// </summary>
     public partial class NewTaskPopup : Window
     {
-
-        public NewTaskPopup()
+        int bucketSelectedId;
+        int userID;
+        public NewTaskPopup(string token, int bucketId, int userId)
         {
             InitializeComponent();
-            ComboBoxItem low = new ComboBoxItem();
-            ComboBoxItem medium = new ComboBoxItem();
-            ComboBoxItem high = new ComboBoxItem();
-            low.Content = "Low";
-            medium.Content = "Medium";
-            high.Content = "High";
-            task_priority.Items.Add(low);
-            task_priority.Items.Add(medium);
-            task_priority.Items.Add(high);
+            bucketSelectedId = bucketId;
+            userID = userId;
+            if (!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
+                isClient = true;
+            }
         }
 
         public String m_Title { get; set; }
@@ -39,26 +44,43 @@ namespace ChronosClient.Screens.Windows.Popups
         public DateTime? m_EndDate { get; set; }
         public String m_Priority { get; set; }
 
-        private void create_task_Click(object sender, RoutedEventArgs e)
+        static HttpClient client = new HttpClient();
+
+        static bool isClient = false;
+        static async Task<HttpResponseMessage> CreateTaskAsync(TaskCreateModel task)
+        {
+            HttpResponseMessage httpResponse = await client.PostAsJsonAsync("Tasks", task);
+            return httpResponse;
+        }
+
+        private async void create_task_Click(object sender, RoutedEventArgs e)
         {
             if (task_name.Text.Length == 0)
             {
-                MessageBox.Show("You cannot leave the field empty!", "Error");
+                MessageBox.Show("You cannot leave the name field empty!", "Error");
                 return;
             }
             else if (task_priority.SelectedIndex == -1)
             {
-                MessageBox.Show("You must select a priority");
+                MessageBox.Show("You must select a priority!");
                 return;
             }
-
             else
             {
-                m_Title = task_name.Text;
-                m_Description = task_description.Text;
-                m_Priority = task_priority.SelectedValue.ToString();
-                m_EndDate = task_end_date.SelectedDate;
+                TaskCreateModel task = new TaskCreateModel
+                {
+                    Title = task_name.Text,
+                    Description = task_description.Text,
+                    CreatedAt = null,
+                    StartDate = null,
+                    EndDate = task_end_date.SelectedDate,
+                    Progress = 0,
+                    Priority = task_priority.SelectedIndex,
+                    BucketId = bucketSelectedId,
+                    UserId = userID
 
+                };
+                var response = await CreateTaskAsync(task);
             }
             this.Close();
         }
