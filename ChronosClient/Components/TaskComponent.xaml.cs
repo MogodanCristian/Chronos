@@ -32,12 +32,18 @@ namespace ChronosClient.Components
             DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskComponent), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty TaskAssignedToProperty =
             DependencyProperty.Register("TaskAssignedTo", typeof(string), typeof(TaskComponent), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TaskIdProperty =
+            DependencyProperty.Register("TaskId", typeof(int), typeof(TaskComponent), new PropertyMetadata(0));
 
         public TaskComponent()
         {
             InitializeComponent();
         }
-
+        public int TaskId
+        {
+            get { return (int)GetValue(TaskIdProperty); }
+            set { SetValue(TaskIdProperty, value); }
+        }
         public string TaskTitle
         {
             get { return (string)GetValue(TaskTitleProperty); }
