@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChronosClient.Screens.Windows.Popups"
         mc:Ignorable="d"
-        Title="NewTaskPopup" Height="450" Width="800">
-    <Grid>
-        <Label Content="New Task" FontSize="22" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top"/>
+        Title="New Task" Height="350" Width="600">
+    <Grid Background="#FF2C2F33">
+        <Label x:Name="new_title_label" Content="New Task" FontSize="22" HorizontalAlignment="Center" Margin="239,26,247.6,0" VerticalAlignment="Top" Width="107" Foreground="White"/>
 
-        <Label Content="Title" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top"/>
-        <Label Content="Description" HorizontalAlignment="Left" Margin="125,150,0,0" VerticalAlignment="Top"/>
-        <Label Content="End Date" HorizontalAlignment="Left" Margin="125,200,0,0" VerticalAlignment="Top"/>
-        <Label Content="Priority" HorizontalAlignment="Left" Margin="125,250,0,0" VerticalAlignment="Top"/>
+        <Label Content="Title:" HorizontalAlignment="Left" Margin="96,96,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="53,118,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+        <Label Content="End date:" HorizontalAlignment="Left" Margin="69,145,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="78,170,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
 
-        <TextBox x:Name="task_name"  HorizontalAlignment="Left" Height="23" Margin="200,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="task_description" HorizontalAlignment="Left" Height="23" Margin="200,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="task_end_date" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="task_priority" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="task_name"  HorizontalAlignment="Left" Height="23" Margin="141,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399"/>
+        <TextBox x:Name="task_description" HorizontalAlignment="Left" Height="23" Margin="141,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399"/>
+        <DatePicker x:Name="task_end_date" HorizontalAlignment="Left" Margin="141,148,0,0" VerticalAlignment="Top" Width="399"/>
+        <ComboBox x:Name="task_priority" HorizontalAlignment="Left" Margin="141,176,0,0" VerticalAlignment="Top" Width="399"/>
 
-        <Button x:Name="create_task" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Create Task" Margin="0,0,0,30" Width="75" Height="25" Click="create_task_Click"/>
+        <Button x:Name="create_task" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Create Task" Margin="245,0,247.6,47.8" Width="101" Height="37" Click="create_task_Click" Background="#FF404EED" FontSize="14" Foreground="White"/>
 
     </Grid>
 </Window>

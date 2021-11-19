@@ -9,28 +9,28 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
-        <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
+        <Border Background="#FFF6F6F6" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity=".75" />
             </Border.Effect>
             <StackPanel>
                 <StackPanel Margin="5">
-                    <Label x:Name="task_name" Content="{Binding TaskTitle}" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_name" Content="{Binding TaskTitle}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label x:Name="task_description" Content="{Binding TaskDescription}" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_description" Content="{Binding TaskDescription}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label x:Name="task_start_date" Content="{Binding TaskStartDate}" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_start_date" Content="{Binding TaskStartDate}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label x:Name="task_end_date" Content="{Binding TaskEndDate}" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_end_date" Content="{Binding TaskEndDate}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label x:Name="task_priority" Content="{Binding TaskPriority}" HorizontalAlignment="Center"></Label>
+                    <Label x:Name="task_priority" Content="{Binding TaskPriority}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
                 <StackPanel Margin="5">
-                    <Label Name="assigned_to" Content="{Binding TaskAssignedTo}" HorizontalAlignment="Center"></Label>
+                    <Label Name="assigned_to" Content="{Binding TaskAssignedTo}" HorizontalAlignment="Center" Foreground="Black" FontSize="16"></Label>
                 </StackPanel>
             </StackPanel>
         </Border>

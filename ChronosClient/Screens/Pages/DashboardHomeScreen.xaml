@@ -7,12 +7,12 @@
       xmlns:views="clr-namespace:ChronosClient.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DashboardHomeScreen">
+      Title="Chronos Planner Home">
 
-    <Grid>
-        <TextBlock x:Name="welcome_textblock" Margin="0,30,0,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="246"/>
+    <Grid Background="#FF2C2F33">
+        <TextBlock x:Name="welcome_textblock" Margin="276,26,209,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="315" Foreground="White" TextAlignment="Center" Height="29" FontSize="16" FontStyle="Italic"/>
         <ScrollViewer x:Name="PlansScrollView" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,60,0,0">
-            <views:PlanItemWrapPanelView x:Name="PlanItemsWrapPanel"/>
+            <views:PlanItemWrapPanelView x:Name="PlanItemsWrapPanel" Background="#FF2C2F33"/>
         </ScrollViewer>
     </Grid>
 </Page>

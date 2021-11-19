@@ -5,24 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChronosClient.Screens.Pages"
         mc:Ignorable="d"
-        Title="RegisterScreen" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="first_name" HorizontalAlignment="Left" Height="23" Margin="386,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="last_name" HorizontalAlignment="Left" Height="23" Margin="386,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="email" HorizontalAlignment="Left" Height="23" Margin="386,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="First Name:" HorizontalAlignment="Left" Margin="270,87,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Label Content="Last Name" HorizontalAlignment="Left" Margin="270,115,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Label Content="E-mail" HorizontalAlignment="Left" Margin="270,171,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="270,199,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Label Content="Confirm Password:" HorizontalAlignment="Left" Margin="270,227,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Label Content="Date of Birth:" HorizontalAlignment="Left" Margin="270,143,0,0" VerticalAlignment="Top" Height="23" Width="111"/>
-        <Button x:Name="register_button" Content="Register" HorizontalAlignment="Left" Margin="413,267,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.877,0.042" Click="register_button_Click"/>
-        <Button x:Name="back_button" Content="Back" HorizontalAlignment="Left" Margin="306,267,0,0" VerticalAlignment="Top" Width="75" Click="back_button_Click"/>
-        <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="386,198,0,0" VerticalAlignment="Top" Width="120" Height="22" PasswordChanged="password_PasswordChanged"/>
-        <PasswordBox x:Name="confirm_password" HorizontalAlignment="Left" Margin="386,228,0,0" VerticalAlignment="Top" Width="120" Height="22" PasswordChanged="confirm_password_PasswordChanged"/>
-        <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="386,142,0,0" VerticalAlignment="Top" Height="22" Width="120"/>
-        <Label x:Name="password_ok" Content="Password isn't yet valid!" HorizontalAlignment="Left" Margin="511,195,0,0" VerticalAlignment="Top" Height="27" Width="154"/>
-        <Label x:Name="password_match" Content="Passwords don't match!" HorizontalAlignment="Left" Margin="511,227,0,0" VerticalAlignment="Top" Height="27" Width="154" Visibility="Hidden"/>
+        Title="Register" Height="300" Width="600">
+
+    <Grid Background="#FF2C2F33">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="89*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="first_name" HorizontalAlignment="Left" Height="23" Margin="140,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272"/>
+        <TextBox x:Name="last_name" HorizontalAlignment="Left" Height="23" Margin="140,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Grid.RowSpan="2"/>
+        <TextBox x:Name="email" HorizontalAlignment="Left" Height="23" Margin="140,20.6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Grid.Row="1"/>
+        <Label Content="First Name:" HorizontalAlignment="Left" Margin="55,86,0,0" VerticalAlignment="Top" Height="23" Width="78" Foreground="White"/>
+        <Label Content="Last Name:" HorizontalAlignment="Left" Margin="55,115,0,0" VerticalAlignment="Top" Height="23" Width="74" Grid.RowSpan="2" Foreground="White"/>
+        <Label Content="E-mail:" HorizontalAlignment="Left" Margin="79,19.6,0,0" VerticalAlignment="Top" Height="23" Width="111" Grid.Row="1" Foreground="White"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="75,75.6,0,0" VerticalAlignment="Top" Height="23" Width="111" Grid.Row="1" Foreground="White"/>
+        <Label Content="Confirm Password:" HorizontalAlignment="Left" Margin="24,104.6,0,0" VerticalAlignment="Top" Height="23" Width="111" Grid.Row="1" Foreground="White"/>
+        <Label Content="Date of Birth:" HorizontalAlignment="Left" Margin="55,48.6,0,0" VerticalAlignment="Top" Height="23" Width="78" Grid.Row="1" Foreground="White"/>
+        <Button x:Name="register_button" Content="Register" HorizontalAlignment="Left" Margin="360,141.6,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.877,0.042" Click="register_button_Click" Grid.Row="1" Background="#FF404EED" Foreground="White"/>
+        <Button x:Name="back_button" Content="Back" HorizontalAlignment="Left" Margin="120,141.6,0,0" VerticalAlignment="Top" Width="120" Click="back_button_Click" Grid.Row="1" Background="#FF404EED" Foreground="White"/>
+        <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="140,75.6,0,0" VerticalAlignment="Top" Width="272" Height="23" PasswordChanged="password_PasswordChanged" Grid.Row="1"/>
+        <PasswordBox x:Name="confirm_password" HorizontalAlignment="Left" Margin="140,104.6,0,0" VerticalAlignment="Top" Width="272" Height="23" PasswordChanged="confirm_password_PasswordChanged" Grid.Row="1"/>
+        <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="138,47.6,0,0" VerticalAlignment="Top" Height="23" Width="272" Grid.Row="1"/>
+        <Label x:Name="password_ok" Content="Password isn't yet valid!" HorizontalAlignment="Left" Margin="417,75.6,0,0" VerticalAlignment="Top" Height="27" Width="154" Grid.Row="1" Foreground="White"/>
+        <Label x:Name="password_match" Content="Passwords don't match!" HorizontalAlignment="Left" Margin="417,104.6,0,0" VerticalAlignment="Top" Height="27" Width="154" Visibility="Hidden" Grid.Row="1" Foreground="White"/>
+        <Label Content="Register" HorizontalAlignment="Left" Margin="267,26,0,0" VerticalAlignment="Top" Width="88" Height="42" Foreground="White" FontStyle="Italic" FontSize="22"/>
 
     </Grid>
 </Page>

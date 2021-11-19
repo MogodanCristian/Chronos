@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              
-             x:Name="root">
+             x:Name="root" Background="#FF2C2F33">
 
     <WrapPanel HorizontalAlignment="Center" ItemWidth="300" x:Name="WrapPanelPlanItems">
         <!--<components:PlanItemCard Margin="10" Title="Combinatii" CreatedAt="marți, 16 noiembrie 2021"/>

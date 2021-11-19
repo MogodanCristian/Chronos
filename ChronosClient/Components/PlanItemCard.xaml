@@ -13,8 +13,8 @@
             <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity=".75" />
         </Border.Effect>
         <WrapPanel Orientation="Horizontal">
-            <Border Height="75" Width="75" Background="#FF5663F7">
-                <Image x:Name="letter" Stretch="Fill" Loaded="Image_Loaded" Width="60" Height="60"/>
+            <Border Height="75" Width="75" Background="#FF404EED">
+                <Image x:Name="letter" Stretch="Fill" Loaded="Image_Loaded" Width="60" Height="60" OpacityMask="Black"/>
             </Border>
             <WrapPanel Margin="5" Orientation="Vertical">
                 <TextBlock Margin="5" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Text="{Binding Title}"/>
