@@ -100,7 +100,7 @@ namespace ChronosClient.Components
         {
             Bucket bucket = new Bucket { BucketID = BucketId };
             var response = await DeleteBucketAsync(bucket);
-            PlanScreen.m_buckets.OnChanged(e);
+            PlanScreen.handler.OnChanged(e);
         }
     }
 }

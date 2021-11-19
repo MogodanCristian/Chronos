@@ -99,6 +99,7 @@ namespace ChronosClient.Screens.Pages
         }
         public PlanScreen(int UserId, string token, int PlanId)
         {
+            InitializeComponent();
             PlanSelectedId = PlanId;
             jwtToken = token;
             this.UserId = UserId;
@@ -106,7 +107,6 @@ namespace ChronosClient.Screens.Pages
             handler.Changed += new ChangedEventHandlerTasks(TasksChanged);
             if (!clientExists)
             {
-                InitializeComponent();
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
