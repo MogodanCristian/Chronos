@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,12 +34,30 @@ namespace ChronosClient.Components
             DependencyProperty.Register("TaskPriority", typeof(string), typeof(TaskComponent), new PropertyMetadata(string.Empty));
         public static readonly DependencyProperty TaskAssignedToProperty =
             DependencyProperty.Register("TaskAssignedTo", typeof(string), typeof(TaskComponent), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TaskIdProperty =
+            DependencyProperty.Register("TaskId", typeof(int), typeof(TaskComponent), new PropertyMetadata(0));
 
-        public TaskComponent()
+        static bool isClient = false;
+        static HttpClient client = new HttpClient();
+        static string jwtToken;
+        public TaskComponent(string token)
         {
             InitializeComponent();
+            jwtToken = token;
+            if (!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
+                isClient = true;
+            }
         }
-
+        public int TaskId
+        {
+            get { return (int)GetValue(TaskIdProperty); }
+            set { SetValue(TaskIdProperty, value); }
+        }
         public string TaskTitle
         {
             get { return (string)GetValue(TaskTitleProperty); }
@@ -67,6 +87,23 @@ namespace ChronosClient.Components
         {
             get { return (string)GetValue(TaskTitleProperty); }
             set { SetValue(TaskAssignedToProperty, value); }
+        }
+        static async Task<HttpResponseMessage> DeleteTaskAsync(int TaskId)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = new StringContent("{ TaskID:" + TaskId.ToString() + "}", Encoding.UTF8, "application/json"),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("https://chronosapi.azurewebsites.net/api/Tasks")
+            };
+            HttpResponseMessage message = await client.SendAsync(request);
+            return message;
+        }
+        private async void delete_task_Click(object sender, RoutedEventArgs e)
+        {
+            var response = await DeleteTaskAsync(TaskId);
+            MessageBox.Show(response.StatusCode.ToString());
+            BucketComponent.handler.OnChanged(e);
         }
     }
 }

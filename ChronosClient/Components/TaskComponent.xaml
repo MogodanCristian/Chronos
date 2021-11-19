@@ -14,6 +14,11 @@
                 <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity=".75" />
             </Border.Effect>
             <StackPanel>
+                <Menu Background="White" HorizontalAlignment="Right" Margin="0,0,0,20">
+                    <MenuItem Header="..."  FontWeight="Bold" HorizontalAlignment="Right" >
+                        <MenuItem x:Name="delete_task" Header="Delete Task" FontWeight="Medium" Click="delete_task_Click"/>
+                    </MenuItem>
+                </Menu>
                 <StackPanel Margin="5">
                     <Label x:Name="task_name" Content="{Binding TaskTitle}" HorizontalAlignment="Center"></Label>
                 </StackPanel>

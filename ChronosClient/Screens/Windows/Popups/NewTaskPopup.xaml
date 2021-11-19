@@ -17,8 +17,11 @@
         <TextBox x:Name="task_name"  HorizontalAlignment="Left" Height="23" Margin="200,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="task_description" HorizontalAlignment="Left" Height="23" Margin="200,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <DatePicker x:Name="task_end_date" HorizontalAlignment="Left" Margin="200,200,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="task_priority" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="100"/>
-
+        <ComboBox x:Name="task_priority" HorizontalAlignment="Left" Margin="200,250,0,0" VerticalAlignment="Top" Width="100">
+            <ComboBoxItem x:Name="low" Content="Low" />
+            <ComboBoxItem x:Name="medium" Content="Medium" />
+            <ComboBoxItem x:Name="high" Content="High" />
+        </ComboBox>
         <Button x:Name="create_task" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Create Task" Margin="0,0,0,30" Width="75" Height="25" Click="create_task_Click"/>
 
     </Grid>

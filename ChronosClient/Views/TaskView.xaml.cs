@@ -25,9 +25,9 @@ namespace ChronosClient.Views
         {
             InitializeComponent();
         }
-        public void AddTask(string taskTitle, string taskDescription, DateTime? dateTime, string priority)
+        public void AddTask(string taskTitle, string taskDescription, DateTime? dateTime, string priority, string token)
         {
-            tasks.Children.Add(new TaskComponent
+            tasks.Children.Add(new TaskComponent(token)
             {
                 TaskTitle = taskTitle,
                 TaskDescription = taskDescription,

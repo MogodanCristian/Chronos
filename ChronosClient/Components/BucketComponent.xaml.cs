@@ -44,7 +44,7 @@ namespace ChronosClient.Components
             get { return (int)GetValue(BucketIdProperty); }
             set { SetValue(BucketIdProperty, value); }
         }
-
+        static public TaskUpdateHandler handler;
         static HttpClient client = new HttpClient();
         static bool isClient = false;
         int UserId;
@@ -56,6 +56,8 @@ namespace ChronosClient.Components
             InitializeComponent();
             this.UserId = UserId;
             jwtToken = token;
+            handler = new TaskUpdateHandler();
+            handler.Changed += new ChangedEventHandlerTasks(TasksChanged);
             if (!isClient)
             {
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
@@ -81,10 +83,10 @@ namespace ChronosClient.Components
 
         private void add_task_Click(object sender, RoutedEventArgs e)
         {
-            NewTaskPopup newTaskPopup = new NewTaskPopup();
+            NewTaskPopup newTaskPopup = new NewTaskPopup(jwtToken,BucketId,UserId);
             if (!newTaskPopup.ShowDialog() == true)
             {
-                taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority);
+                taskView.AddTask(newTaskPopup.m_Title, newTaskPopup.m_Description, newTaskPopup.m_EndDate, newTaskPopup.m_Priority,jwtToken);
             }
         }
         public class DeletedEventArgs : EventArgs
@@ -96,6 +98,10 @@ namespace ChronosClient.Components
             Bucket bucket = new Bucket { BucketID = BucketId };
             var response = await DeleteBucketAsync(bucket);
             PlanScreen.m_buckets.OnChanged(e);
+        }
+        private void TasksChanged(object sender, EventArgs e)
+        {
+            ///fetch from database;
         }
     }
 }
