@@ -8,7 +8,7 @@
         Title="Login" Height="250" Width="400">
     <Grid Background="#FF2C2F33">
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="100,190,0,0" VerticalAlignment="Top" Width="200" Click="LoginButton_Click" Background="#FF404EED" Foreground="White"/>
-        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" TextAlignment="Center"/>
+        <TextBox x:Name="EmailTextBox" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" TextAlignment="Left"/>
         <CheckBox x:Name="KeepMeLoggedIn" Content="Keep me logged in&#xD;&#xA;" HorizontalAlignment="Left" Margin="144,147,0,0" VerticalAlignment="Top" Height="20" Width="121" HorizontalContentAlignment="Center" Foreground="White" FontStyle="Italic"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="119,110,0,0" VerticalAlignment="Top" Width="241" Height="23"/>
         <Label Name="GoToRegisterLabel" Content="Not yet registered? Sign up here." HorizontalAlignment="Left" Margin="100,214,0,0" VerticalAlignment="Top" Width="200" MouseLeftButtonDown="GoToRegisterLabel_MouseLeftButtonDown" HorizontalContentAlignment="Center" Foreground="White" FontStyle="Italic"/>
