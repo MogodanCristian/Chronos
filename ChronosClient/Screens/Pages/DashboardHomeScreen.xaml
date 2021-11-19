@@ -10,7 +10,7 @@
       Title="Chronos Planner Home">
 
     <Grid Background="#FF2C2F33">
-        <TextBlock x:Name="welcome_textblock" Margin="276,26,209,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="315" Foreground="White" TextAlignment="Center" Height="29" FontSize="16" FontStyle="Italic"/>
+        <TextBlock x:Name="welcome_textblock" Margin="10,26,10,0" TextWrapping="Wrap" Text="Welcome, FirstName LastName! " VerticalAlignment="Top" HorizontalAlignment="Center" Width="780" Foreground="White" TextAlignment="Center" Height="29" FontSize="16" FontStyle="Italic"/>
         <ScrollViewer x:Name="PlansScrollView" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,60,0,0">
             <views:PlanItemWrapPanelView x:Name="PlanItemsWrapPanel" Background="#FF2C2F33"/>
         </ScrollViewer>
