@@ -37,6 +37,11 @@ namespace ChronosClient.Screens.Pages
             HttpResponseMessage response = await client.GetAsync($"buckets/{PlanId}");
             return response;
         }
+        static async Task<HttpResponseMessage> GetTasksForPlanAsync(int PlanId)
+        {
+            HttpResponseMessage response = await client.GetAsync($"Tasks/{PlanId}");
+            return response;
+        }
         private async Task<List<Bucket>> GetBucketItems(int PlanId)
         {
             var response = await GetBucketsForPlanAsync(PlanId);
@@ -48,6 +53,18 @@ namespace ChronosClient.Screens.Pages
             List<Bucket> buckets = await response.Content.ReadAsAsync<List<Bucket>>();
             return buckets;
         }
+     
+        private async Task<List<TasksForPlanResponse>> GetTaskItems(int PlanId)
+        {
+            var response = await GetTasksForPlanAsync(PlanId);
+            if(response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
+            List<TasksForPlanResponse> tasksInPlan = await response.Content.ReadAsAsync<List<TasksForPlanResponse>>();
+            return tasksInPlan;
+        }
         public async void initializeBuckets(int PlanId)
         {
             BucketPanelView.clearBuckets();
@@ -57,6 +74,24 @@ namespace ChronosClient.Screens.Pages
                 foreach (Bucket bucket in bucketItems)
                 {
                     BucketPanelView.AddBucket(bucket.Title, bucket.BucketID,UserId, jwtToken);
+                    m_buckets.Add(bucket);
+                }
+            }
+        }
+        public async void initializeTasksInBuckets(int PlanId)
+        {
+            BucketPanelView.clearBuckets();
+            List<Bucket> bucketItems = await GetBucketItems(PlanId);
+            List<TasksForPlanResponse> tasksInPlan = await GetTaskItems(PlanId);
+            if (bucketItems != null)
+            {
+                foreach (Bucket bucket in bucketItems)
+                {
+                    BucketPanelView.AddBucket(bucket.Title, bucket.BucketID, UserId, jwtToken);
+                    foreach (TasksForPlanResponse task in tasksInPlan)
+                    {
+                        BucketPanelView.AddTaskToBucketComponent(task.BucketID, task);
+                    }
                     m_buckets.Add(bucket);
                 }
             }
@@ -77,7 +112,7 @@ namespace ChronosClient.Screens.Pages
                 m_buckets = new BucketList();
                 m_buckets.Changed += new ChangedEventHandler(BucketsChanged);
             }
-            initializeBuckets(PlanSelectedId);
+            initializeTasksInBuckets(PlanSelectedId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -85,13 +120,13 @@ namespace ChronosClient.Screens.Pages
             NewBucketPopup newBucketPopup = new NewBucketPopup(jwtToken, PlanSelectedId);
             if (!newBucketPopup.ShowDialog() == true)
             {
-                initializeBuckets(PlanSelectedId);
+                initializeTasksInBuckets(PlanSelectedId);
             }
 
         }
         private void BucketsChanged(object sender, EventArgs e)
         {
-            initializeBuckets(PlanSelectedId);
+            initializeTasksInBuckets(PlanSelectedId);
         }
 
     }

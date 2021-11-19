@@ -60,7 +60,7 @@ namespace ChronosClient.Screens.Pages
             {
                 foreach (Plan plan in planItems)
                 {
-                    PlanItemsWrapPanel.addPlanItem(plan.PlanId, plan.Title, plan.CreatedAt.ToString().Substring(0, 10), user.Token);
+                    PlanItemsWrapPanel.addPlanItem(plan.PlanId, plan.Title, plan.CreatedAt.ToString().Substring(0, 10), user.Token, UserId);
                 }
             }
         }

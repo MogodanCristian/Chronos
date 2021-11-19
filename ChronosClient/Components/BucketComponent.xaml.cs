@@ -79,6 +79,11 @@ namespace ChronosClient.Components
             return message;
         }
 
+        public void add_a_new_task(TasksForPlanResponse task)
+        {
+            taskView.AddTask(task.Title, task.Description, task.EndDate, task.Priority.ToString());
+        }
+
         private void add_task_Click(object sender, RoutedEventArgs e)
         {
             NewTaskPopup newTaskPopup = new NewTaskPopup();
