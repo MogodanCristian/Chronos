@@ -21,13 +21,16 @@ namespace ChronosClient.Views
     /// </summary>
     public partial class TaskView : UserControl
     {
+        List<TaskComponent> m_tasks;
         public TaskView()
         {
             InitializeComponent();
+            m_tasks = new List<TaskComponent>();
         }
         public void AddTask(int taskId, string taskTitle, string taskDescription, DateTime? dateTime, string priority, string token)
         {
-            tasks.Children.Add(new TaskComponent(token)
+
+            TaskComponent newTask = new TaskComponent(token)
             {
                 TaskId = taskId,
                 TaskTitle = taskTitle,
@@ -36,7 +39,16 @@ namespace ChronosClient.Views
                 TaskPriority = priority,
 
                 Margin = new Thickness(10)
-            });
+            };
+            foreach(var t in m_tasks)
+            {
+                if(t.TaskId == newTask.TaskId)
+                {
+                    return;
+                }
+            }
+            m_tasks.Add(newTask);
+            tasks.Children.Add(newTask);
         }
     }
 }

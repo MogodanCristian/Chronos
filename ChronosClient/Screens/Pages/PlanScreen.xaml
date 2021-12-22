@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ChronosClient.Screens"
+      xmlns:local="clr-namespace:ChronosClient.Screens.Pages"
       xmlns:components="clr-namespace:ChronosClient.Components"
       xmlns:views="clr-namespace:ChronosClient.Views"
       mc:Ignorable="d" 
@@ -13,7 +13,7 @@
     <Grid Background="#FF2C2F33">
         <Button Width="100" Height="30" Content="Add New Bucket" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF404EED" Foreground="White"></Button>
         <WrapPanel Name="plan_screen_grid"  Margin="0,50,0,0" Background="#FF2C2F33">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <views:BucketView x:Name="BucketPanelView"/>
             </ScrollViewer>
         </WrapPanel>

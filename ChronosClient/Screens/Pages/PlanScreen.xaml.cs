@@ -92,11 +92,10 @@ namespace ChronosClient.Screens.Pages
                     if(tasksInPlan!=null)
                     {
                         foreach (TasksForPlanResponse task in tasksInPlan)
-                        {
-                            BucketPanelView.AddTaskToBucketComponent(task.BucketID, task);
+                        {  
+                             BucketPanelView.AddTaskToBucketComponent(task.BucketID, task);
                         }
-                    }
-         
+                    }              
                     m_buckets.Add(bucket);
                 }
             }
@@ -129,7 +128,6 @@ namespace ChronosClient.Screens.Pages
             {
                 initializeTasksInBuckets(PlanSelectedId);
             }
-
         }
         private void BucketsChanged(object sender, EventArgs e)
         {
