@@ -32,6 +32,7 @@ namespace ChronosClient.Screens.Pages
         string jwtToken;
         int UserId;
         static public TaskUpdateHandler handler;
+        bool UserChangedText = false;
 
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
@@ -103,6 +104,11 @@ namespace ChronosClient.Screens.Pages
         public PlanScreen(int UserId, string token, int PlanId)
         {
             InitializeComponent();
+            member_name_search_textbox.TextChanged -= member_name_search_textbox_TextChanged;
+            member_name_search_textbox.Text = "Enter name of member to add...";
+            member_name_search_textbox.TextChanged += member_name_search_textbox_TextChanged;
+            Panel.SetZIndex(MembersExpander, 0);
+            Panel.SetZIndex(plan_screen_grid, 1);
             PlanSelectedId = PlanId;
             jwtToken = token;
             this.UserId = UserId;
@@ -138,6 +144,49 @@ namespace ChronosClient.Screens.Pages
         {
             ///fetch from database;
             initializeTasksInBuckets(PlanSelectedId);
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            //member_name_search_textbox.Focus();
+            //member_name_search_textbox.Select(0, 0);
+            Panel.SetZIndex(MembersExpander, 1);
+            Panel.SetZIndex(plan_screen_grid, 0);
+        }
+
+        private void MembersExpander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            Panel.SetZIndex(MembersExpander, 0);
+            Panel.SetZIndex(plan_screen_grid, 1);
+        }
+
+        private void member_name_search_textbox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            UserChangedText = false;
+            if (string.IsNullOrWhiteSpace(member_name_search_textbox.Text))
+                member_name_search_textbox.Text = "Enter name of member to add...";
+        }
+
+        private void member_name_search_textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string defaultText = "Enter name of member to add...";
+            if(member_name_search_textbox.Text.Contains(defaultText) && UserChangedText == true )
+            {
+                member_name_search_textbox.Text = member_name_search_textbox.Text.Replace(defaultText, "");
+                member_name_search_textbox.SelectionStart++;
+            }
+        }
+
+        private void member_name_search_textbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            member_name_search_textbox.Focus();
+            member_name_search_textbox.SelectionStart = 0;
+        }
+
+        private void member_name_search_textbox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UserChangedText = true;
+            member_name_search_textbox.SelectionStart = 0;
         }
     }
 }

@@ -17,5 +17,21 @@
                 <views:BucketView x:Name="BucketPanelView"/>
             </ScrollViewer>
         </WrapPanel>
+        <Expander x:Name="MembersExpander" HorizontalAlignment="Center" VerticalAlignment="Top" Width="350" Height="320" Margin="455,0,0,0" Expanded="Expander_Expanded" Collapsed="MembersExpander_Collapsed">
+            <Expander.Header>
+                <WrapPanel>
+                    <Image  Margin="5,0,0,0" Width="40" Height="40" Source="\Resources\members.png"/>
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" FontSize="15" Foreground="White" >Members</TextBlock>
+                </WrapPanel>
+            </Expander.Header>
+            <Expander.Content>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Background="White" Name="members_wrap_panel">
+                        <TextBox Foreground="DimGray" Background="#d7d7d7" BorderBrush="DodgerBlue" BorderThickness="1.5"  VerticalContentAlignment="Center" Height="35" x:Name="member_name_search_textbox" Margin="15,15,15,0" FontSize="15" LostFocus="member_name_search_textbox_LostFocus" TextChanged="member_name_search_textbox_TextChanged" MouseLeftButtonDown="member_name_search_textbox_MouseLeftButtonDown" GotFocus="member_name_search_textbox_GotFocus" />
+                        <views:MembersView x:Name="MembersWrapPanelView" Margin="0,10,20,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Expander.Content>
+        </Expander>
     </Grid>
 </Page>
