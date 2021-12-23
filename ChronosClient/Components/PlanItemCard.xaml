@@ -8,11 +8,20 @@
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{Binding RelativeSource={RelativeSource Self}}" MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              >
+    
     <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
+        
         <Border.Effect>
             <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity=".75" />
         </Border.Effect>
-        <WrapPanel Orientation="Horizontal">
+        <StackPanel>
+            <Menu Background="White" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top">
+                <MenuItem Header="..."  FontWeight="Bold" HorizontalAlignment="Right" Background="#FF404EED" Foreground="White" Height="22" Width="24">
+                    <MenuItem x:Name="delete_plan" Header="Delete Plan" FontWeight="Medium" Click="delete_plan_Click" Foreground="Black"/>
+                </MenuItem>
+            </Menu>
+            <WrapPanel Orientation="Horizontal">
+            
             <Border Height="75" Width="75" Background="#FF404EED">
                 <Image x:Name="letter" Stretch="Fill" Loaded="Image_Loaded" Width="60" Height="60" OpacityMask="Black"/>
             </Border>
@@ -21,5 +30,8 @@
                 <TextBlock Margin="0,12,15,0" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center" Text="{Binding CreatedAt}"/>
             </WrapPanel>
         </WrapPanel>
+        
+        </StackPanel>
     </Border>
+    
 </UserControl>

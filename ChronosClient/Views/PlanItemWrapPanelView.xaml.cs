@@ -28,7 +28,7 @@ namespace ChronosClient.Views
 
         public void addPlanItem(int id, string title, string createdAt, string token, int userId)
         {
-            WrapPanelPlanItems.Children.Add(new PlanItemCard
+            WrapPanelPlanItems.Children.Add(new PlanItemCard(token)
             {
                 PlanId = id,
                 Title = title,

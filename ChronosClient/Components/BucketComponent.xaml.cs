@@ -64,7 +64,6 @@ namespace ChronosClient.Components
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
                 isClient = true;
             }
-
         }
 
         static async Task<HttpResponseMessage> DeleteBucketAsync(Bucket bucket)

@@ -1,9 +1,12 @@
-﻿using ChronosClient.Screens.Pages;
+﻿using ChronosClient.Models;
+using ChronosClient.Screens.Pages;
 using ChronosClient.Screens.Windows;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -67,11 +70,22 @@ namespace ChronosClient.Components
             set { SetValue(UserIdProperty, value); }
         }
 
-       
 
-        public PlanItemCard()
+        static HttpClient client = new HttpClient();
+        static bool isClient = false;
+        string jwtToken;
+        public PlanItemCard(string token)
         {
             InitializeComponent();
+            jwtToken = token;
+            if (!isClient)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
+                isClient = true;
+            }
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -295,6 +309,25 @@ namespace ChronosClient.Components
                     img.Source = bitmapImage;
                 }
             }
+        }
+
+        static async Task<HttpResponseMessage> DeleteBucketAsync(Plan plan)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Content = new StringContent("{ PlanID:" + plan.PlanId.ToString() + "}", Encoding.UTF8, "application/json"),
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("https://chronosapi.azurewebsites.net/api/plans")
+            };
+            HttpResponseMessage message = await client.SendAsync(request);
+            return message;
+        }
+
+        private async void delete_plan_Click(object sender, RoutedEventArgs e)
+        {
+            Plan plan = new Plan { PlanId=(int)GetValue(PlanIdProperty)};
+            var response = await DeleteBucketAsync(plan);
+            DashboardHomeScreen.handler.OnChanged(e);
         }
     }
 }

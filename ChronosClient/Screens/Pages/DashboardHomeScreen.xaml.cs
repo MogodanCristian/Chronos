@@ -33,12 +33,15 @@ namespace ChronosClient.Screens.Pages
             HttpResponseMessage response = await client.GetAsync($"Plans/{UserId}");
             return response;
         }
+        static public UpdateHandler handler;
         public DashboardHomeScreen(UserAuthResponse userAuth)
         {
             try
             {
                 user = userAuth;
                 InitializeComponent();
+                handler = new UpdateHandler();
+                handler.Changed += new ChangedEventHandlerTasks(PlansChanged);
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -75,6 +78,10 @@ namespace ChronosClient.Screens.Pages
 
             List<Plan> plans = await response.Content.ReadAsAsync<List<Plan>>();
             return plans;
+        }
+        private void PlansChanged(object sender, EventArgs e)
+        {
+            initializePlans(user.UserId);
         }
     }
 }
