@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ChronosClient.Models
 {
     public delegate void ChangedEventHandlerTasks(object sender, EventArgs e);
-    public class TaskUpdateHandler
+    public class UpdateHandler
     {
         public event ChangedEventHandlerTasks Changed;
         public virtual void OnChanged(EventArgs e)

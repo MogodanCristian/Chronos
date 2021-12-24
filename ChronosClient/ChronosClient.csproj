@@ -124,7 +124,7 @@
     <Compile Include="Models\PlanDispatcher.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
-    <Compile Include="Models\TaskUpdateHandler.cs" />
+    <Compile Include="Models\UpdateHandler.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\UserMemberInfo.cs" />

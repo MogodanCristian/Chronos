@@ -28,7 +28,7 @@ namespace ChronosClient.Views
 
         public void addPlanItem(int id, string title, string createdAt, string token, int userId)
         {
-            WrapPanelPlanItems.Children.Add(new PlanItemCard
+            WrapPanelPlanItems.Children.Add(new PlanItemCard(token)
             {
                 PlanId = id,
                 Title = title,
@@ -41,7 +41,7 @@ namespace ChronosClient.Views
 
         public void clearPlanItems()
         {
-            if(WrapPanelPlanItems.Children.Count > 0)
+            if (WrapPanelPlanItems.Children.Count > 0)
             {
                 WrapPanelPlanItems.Children.Clear();
             }

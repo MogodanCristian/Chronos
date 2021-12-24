@@ -31,7 +31,7 @@ namespace ChronosClient.Screens.Pages
         int PlanSelectedId;
         string jwtToken;
         int UserId;
-        static public TaskUpdateHandler handler;
+        static public UpdateHandler handler;
         bool UserChangedText = false;
         List<UserMemberInfo> users;
 
@@ -166,7 +166,7 @@ namespace ChronosClient.Screens.Pages
             PlanSelectedId = PlanId;
             jwtToken = token;
             this.UserId = UserId;
-            handler = new TaskUpdateHandler();
+            handler = new UpdateHandler();
             handler.Changed += new ChangedEventHandlerTasks(TasksChanged);
             if (!clientExists)
             {
