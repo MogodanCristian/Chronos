@@ -25,6 +25,7 @@ namespace ChronosClient.Screens.Pages
     /// </summary>
     public partial class DashboardHomeScreen : Page
     {
+        static bool isAlreadyInstantiated = false;
         static HttpClient client = new HttpClient();
         UserAuthResponse user;
 
@@ -39,10 +40,14 @@ namespace ChronosClient.Screens.Pages
             {
                 user = userAuth;
                 InitializeComponent();
-                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
+                if(!isAlreadyInstantiated)
+                {
+                    client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
+                    isAlreadyInstantiated = true;
+                } 
                 welcome_textblock.Text = "Welcome back, " + userAuth.FirstName + " " + userAuth.LastName + "!";
                 initializePlans(userAuth.UserId);
             }

@@ -27,13 +27,18 @@ namespace ChronosClient.Screens.Pages
     /// </summary>
     public partial class LoginScreen : Page
     {
+        static bool isAlreadyCreated = false;
         static HttpClient client = new HttpClient();
         public LoginScreen()
         {
             InitializeComponent();
-            client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if(!isAlreadyCreated)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                isAlreadyCreated = true;
+            }
         }
 
         static async Task<HttpResponseMessage> LoginAsync(UserAuth user)
@@ -75,7 +80,8 @@ namespace ChronosClient.Screens.Pages
                     dashboardScreen.Show();
 
                     var mainWindow = Application.Current.MainWindow as MainWindow;
-                    mainWindow.Close();
+                       mainWindow.Close();
+
 
                 }
                 else
