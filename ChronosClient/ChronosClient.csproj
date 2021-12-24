@@ -106,6 +106,9 @@
     <Compile Include="Components\BucketComponent.xaml.cs">
       <DependentUpon>BucketComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\MemberItemComponent.xaml.cs">
+      <DependentUpon>MemberItemComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\PlanItemCard.xaml.cs">
       <DependentUpon>PlanItemCard.xaml</DependentUpon>
     </Compile>
@@ -118,11 +121,13 @@
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BucketCreateModel.cs" />
     <Compile Include="Models\BucketList.cs" />
+    <Compile Include="Models\PlanDispatcher.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
     <Compile Include="Models\TaskUpdateHandler.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\UserMemberInfo.cs" />
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
       <DependentUpon>DashboardHomeScreen.xaml</DependentUpon>
     </Compile>
@@ -147,6 +152,9 @@
     <Compile Include="Views\BucketView.xaml.cs">
       <DependentUpon>BucketView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MembersView.xaml.cs">
+      <DependentUpon>MembersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlanItemWrapPanelView.xaml.cs">
       <DependentUpon>PlanItemWrapPanelView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +165,10 @@
       <DependentUpon>TaskView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\BucketComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\MemberItemComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BucketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MembersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,6 +302,9 @@
     <Resource Include="Resources\Letters\x.png" />
     <Resource Include="Resources\Letters\y.png" />
     <Resource Include="Resources\Letters\z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\members.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
