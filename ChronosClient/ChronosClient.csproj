@@ -131,8 +131,14 @@
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
       <DependentUpon>DashboardHomeScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\ForgotPasswordScreen.xaml.cs">
+      <DependentUpon>ForgotPasswordScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Pages\PlanScreen.xaml.cs">
       <DependentUpon>PlanScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\ResetPasswordScreen.xaml.cs">
+      <DependentUpon>ResetPasswordScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Windows\DashboardScreen.xaml.cs">
       <DependentUpon>DashboardScreen.xaml</DependentUpon>
@@ -184,7 +190,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screens\Pages\ForgotPasswordScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Pages\PlanScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\ResetPasswordScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
