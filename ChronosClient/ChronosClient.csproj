@@ -121,11 +121,13 @@
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BucketCreateModel.cs" />
     <Compile Include="Models\BucketList.cs" />
+    <Compile Include="Models\PlanDispatcher.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
     <Compile Include="Models\TaskUpdateHandler.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\UserMemberInfo.cs" />
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
       <DependentUpon>DashboardHomeScreen.xaml</DependentUpon>
     </Compile>

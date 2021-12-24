@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChronosClient.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,27 @@ namespace ChronosClient.Views
         public MembersView()
         {
             InitializeComponent();
+        }
+
+        public void addMemberItem(int userId, string firstName, string lastName)
+        {
+
+            MembersWrapPanelPlanItems.Children.Add(new MemberItemComponent
+            {
+                UserId = userId,
+                FirstName = firstName,
+                LastName = lastName,
+                Margin = new Thickness(10)
+            });
+
+        }
+
+        public void clearMemeberItems()
+        {
+            if (MembersWrapPanelPlanItems.Children.Count > 0)
+            {
+                MembersWrapPanelPlanItems.Children.Clear();
+            }
         }
     }
 }

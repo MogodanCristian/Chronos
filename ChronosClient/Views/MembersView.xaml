@@ -10,15 +10,15 @@
          
              x:Name="MembersViewRoot" Background="White">
     <Grid>
-        <WrapPanel HorizontalAlignment="Center" ItemWidth="300" x:Name="WrapPanelPlanItems" Orientation="Vertical">
-            <components:MemberItemComponent Margin="10" FirstName="Cristian" LastName="Mogodan"/>
+        <WrapPanel HorizontalAlignment="Center" ItemWidth="300" x:Name="MembersWrapPanelPlanItems" Orientation="Vertical">
+            <!--<components:MemberItemComponent Margin="10" FirstName="Cristian" LastName="Mogodan"/>
             <components:MemberItemComponent Margin="10" FirstName="Florin" LastName="Cabaua"/>
             <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
             <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
             <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
             <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
             <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
-            <components:MemberItemComponent Margin="10" FirstName="George" LastName="Andronache"/>
+            <components:MemberItemComponent Margin="10" FirstName="Andrei" LastName="Andronache"/>-->
         </WrapPanel>
     </Grid>
 </UserControl>

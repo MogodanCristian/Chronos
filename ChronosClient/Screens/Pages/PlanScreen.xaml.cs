@@ -33,6 +33,7 @@ namespace ChronosClient.Screens.Pages
         int UserId;
         static public TaskUpdateHandler handler;
         bool UserChangedText = false;
+        List<UserMemberInfo> users;
 
         static async Task<HttpResponseMessage> GetBucketsForPlanAsync(int PlanId)
         {
@@ -67,6 +68,25 @@ namespace ChronosClient.Screens.Pages
             List<TasksForPlanResponse> tasksInPlan = await response.Content.ReadAsAsync<List<TasksForPlanResponse>>();
             return tasksInPlan;
         }
+
+        private async Task<HttpResponseMessage> GetUsersAsync()
+        {
+            HttpResponseMessage response = await client.GetAsync($"users/memberinfo");
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> GetUsersInPlanAsync(int PlanId)
+        {
+            HttpResponseMessage response = await client.GetAsync($"Plans/PlanInfo/{PlanId}");
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> PostUserInPlanAsync(PlanDispatcher planDispatcher)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync("PlanDispatcher", planDispatcher);
+            return response;
+        }
+
         public async void initializeBuckets(int PlanId)
         {
             BucketPanelView.clearBuckets();
@@ -101,6 +121,40 @@ namespace ChronosClient.Screens.Pages
                 }
             }
         }
+
+        public async void initializeMembersInPlan(int PlanId)
+        {
+            var response = await GetUsersAsync();
+            users = await response.Content.ReadAsAsync<List<UserMemberInfo>>();
+            this.AutoSuggestionList = users;
+
+            response = await GetUsersInPlanAsync(PlanId);
+            List<UserMemberInfo> membersInPlan = await response.Content.ReadAsAsync<List<UserMemberInfo>>();
+
+            if(membersInPlan!=null)
+            {
+                foreach(UserMemberInfo userInPlan in membersInPlan)
+                {
+                    // add user to panel view.
+                    MembersWrapPanelView.addMemberItem(userInPlan.UserId, userInPlan.FirstName, userInPlan.LastName);
+                }
+            }
+        }
+
+        public async void AddMemberToPlan(int PlanId, UserMemberInfo memberToAdd)
+        {
+            PlanDispatcher planDispatcher = new PlanDispatcher
+            {
+                UserId = memberToAdd.UserId,
+                PlanId = PlanId
+            };
+
+            var response = await PostUserInPlanAsync(planDispatcher);
+            if(response.StatusCode == HttpStatusCode.OK)
+            {
+                MembersWrapPanelView.addMemberItem(memberToAdd.UserId, memberToAdd.FirstName, memberToAdd.LastName);
+            }
+        }
         public PlanScreen(int UserId, string token, int PlanId)
         {
             InitializeComponent();
@@ -125,6 +179,7 @@ namespace ChronosClient.Screens.Pages
                 m_buckets.Changed += new ChangedEventHandler(BucketsChanged);
             }
             initializeTasksInBuckets(PlanSelectedId);
+            initializeMembersInPlan(PlanSelectedId);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -175,6 +230,21 @@ namespace ChronosClient.Screens.Pages
                 member_name_search_textbox.Text = member_name_search_textbox.Text.Replace(defaultText, "");
                 member_name_search_textbox.SelectionStart++;
             }
+
+            if(string.IsNullOrEmpty(member_name_search_textbox.Text))
+            {
+                this.CloseAutoSuggestionBox();
+                return;
+            }
+
+            this.OpenAutoSuggestionBox();
+            var suggestionList = this.AutoSuggestionList.Where(p => (p.FirstName+p.LastName).ToLower().Contains(member_name_search_textbox.Text.ToLower())).ToList();
+            this.autoList.Items.Clear();
+            foreach(var x in suggestionList)
+            {
+                this.autoList.Items.Add(x);
+            }
+            
         }
 
         private void member_name_search_textbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -187,6 +257,79 @@ namespace ChronosClient.Screens.Pages
         {
             UserChangedText = true;
             member_name_search_textbox.SelectionStart = 0;
+        }
+
+        private List<UserMemberInfo> autoSuggestionList = new List<UserMemberInfo>();
+
+        public List<UserMemberInfo> AutoSuggestionList
+        {
+            get { return this.autoSuggestionList; }
+            set { this.autoSuggestionList = value; }
+        }
+
+        private void OpenAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Visible;
+                this.autoListPopup.IsOpen = true;
+                this.autoList.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        private void CloseAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Collapsed;
+                this.autoListPopup.IsOpen = false;
+                this.autoList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+        private void autoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                // Verification.  
+                if (this.autoList.SelectedIndex <= -1)
+                {
+                    // Disable.  
+                    this.CloseAutoSuggestionBox();
+
+                    // Info.  
+                    return;
+                }
+
+                // Disable.  
+                this.CloseAutoSuggestionBox();
+
+                // Settings.  
+
+                UserMemberInfo selectedUser = (UserMemberInfo)this.autoList.SelectedItem;
+                this.member_name_search_textbox.Text = selectedUser.ToString();
+                AddMemberToPlan(PlanSelectedId, selectedUser);
+                this.autoList.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
         }
     }
 }
