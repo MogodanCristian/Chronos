@@ -17,35 +17,35 @@ using System.Windows.Shapes;
 namespace ChronosClient.Views
 {
     /// <summary>
-    /// Interaction logic for PlanItemStackPanelView.xaml
+    /// Interaction logic for MembersView.xaml
     /// </summary>
-    public partial class PlanItemWrapPanelView : UserControl
+    public partial class MembersView : UserControl
     {
-        public PlanItemWrapPanelView()
+        public MembersView()
         {
             InitializeComponent();
         }
 
-        public void addPlanItem(int id, string title, string createdAt, string token, int userId)
+        public void addMemberItem(int userId, string firstName, string lastName, string email)
         {
-            WrapPanelPlanItems.Children.Add(new PlanItemCard(token)
+
+            MembersWrapPanelPlanItems.Children.Add(new MemberItemComponent
             {
-                PlanId = id,
-                Title = title,
                 UserId = userId,
-                CreatedAt = createdAt,
-                Token = token,
-                Margin = new Thickness(10)
+                FirstName = firstName,
+                LastName = lastName,
+                Margin = new Thickness(10),
+                Email = email
             });
+
         }
 
-        public void clearPlanItems()
+        public void clearMemeberItems()
         {
-            if (WrapPanelPlanItems.Children.Count > 0)
+            if (MembersWrapPanelPlanItems.Children.Count > 0)
             {
-                WrapPanelPlanItems.Children.Clear();
+                MembersWrapPanelPlanItems.Children.Clear();
             }
         }
-
     }
 }

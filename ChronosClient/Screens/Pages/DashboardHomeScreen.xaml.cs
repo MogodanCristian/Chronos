@@ -34,6 +34,7 @@ namespace ChronosClient.Screens.Pages
             HttpResponseMessage response = await client.GetAsync($"Plans/{UserId}");
             return response;
         }
+        static public UpdateHandler handler;
         public DashboardHomeScreen(UserAuthResponse userAuth)
         {
             try
@@ -48,6 +49,12 @@ namespace ChronosClient.Screens.Pages
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
                     isAlreadyInstantiated = true;
                 } 
+                handler = new UpdateHandler();
+                handler.Changed += new ChangedEventHandlerTasks(PlansChanged);
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
                 welcome_textblock.Text = "Welcome back, " + userAuth.FirstName + " " + userAuth.LastName + "!";
                 initializePlans(userAuth.UserId);
             }
@@ -73,13 +80,17 @@ namespace ChronosClient.Screens.Pages
         private async Task<List<Plan>> GetPlanItems(int UserId)
         {
             var response = await GetPlansForUserAsync(UserId);
-            if(response.StatusCode == HttpStatusCode.NotFound)
+            if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return null;
             }
 
             List<Plan> plans = await response.Content.ReadAsAsync<List<Plan>>();
             return plans;
+        }
+        private void PlansChanged(object sender, EventArgs e)
+        {
+            initializePlans(user.UserId);
         }
     }
 }

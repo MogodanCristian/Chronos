@@ -106,6 +106,9 @@
     <Compile Include="Components\BucketComponent.xaml.cs">
       <DependentUpon>BucketComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\MemberItemComponent.xaml.cs">
+      <DependentUpon>MemberItemComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\PlanItemCard.xaml.cs">
       <DependentUpon>PlanItemCard.xaml</DependentUpon>
     </Compile>
@@ -118,16 +121,25 @@
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BucketCreateModel.cs" />
     <Compile Include="Models\BucketList.cs" />
+    <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\PlanDispatcher.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
-    <Compile Include="Models\TaskUpdateHandler.cs" />
+    <Compile Include="Models\UpdateHandler.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\UserMemberInfo.cs" />
     <Compile Include="Screens\Pages\DashboardHomeScreen.xaml.cs">
       <DependentUpon>DashboardHomeScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Pages\ForgotPasswordScreen.xaml.cs">
+      <DependentUpon>ForgotPasswordScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Pages\PlanScreen.xaml.cs">
       <DependentUpon>PlanScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Pages\ResetPasswordScreen.xaml.cs">
+      <DependentUpon>ResetPasswordScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Windows\DashboardScreen.xaml.cs">
       <DependentUpon>DashboardScreen.xaml</DependentUpon>
@@ -147,6 +159,9 @@
     <Compile Include="Views\BucketView.xaml.cs">
       <DependentUpon>BucketView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MembersView.xaml.cs">
+      <DependentUpon>MembersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlanItemWrapPanelView.xaml.cs">
       <DependentUpon>PlanItemWrapPanelView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +172,10 @@
       <DependentUpon>TaskView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\BucketComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\MemberItemComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,7 +191,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Screens\Pages\ForgotPasswordScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\Pages\PlanScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Pages\ResetPasswordScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BucketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MembersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +319,7 @@
   <ItemGroup>
     <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\sign_out.png" />
+    <Resource Include="Resources\members.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

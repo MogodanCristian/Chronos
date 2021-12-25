@@ -102,5 +102,11 @@ namespace ChronosClient.Screens.Pages
             var mainWindow = Application.Current.MainWindow as MainWindow;
             mainWindow.Main.Navigate(new RegisterScreen());
         }
+
+        private void GoToForgotPasswordLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.Main.Navigate(new ForgotPasswordScreen());
+        }
     }
 }

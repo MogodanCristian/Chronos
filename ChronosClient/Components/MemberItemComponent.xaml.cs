@@ -1,12 +1,7 @@
-﻿using ChronosClient.Models;
-using ChronosClient.Screens.Pages;
-using ChronosClient.Screens.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,46 +17,32 @@ using System.Windows.Shapes;
 namespace ChronosClient.Components
 {
     /// <summary>
-    /// Interaction logic for PlanItemCard.xaml
+    /// Interaction logic for MemberItemComponent.xaml
     /// </summary>
-    public partial class PlanItemCard : UserControl
+    public partial class MemberItemComponent : UserControl
     {
-        public static readonly DependencyProperty PlanIdProperty =
-                  DependencyProperty.Register("PlanId", typeof(int), typeof(PlanItemCard), new PropertyMetadata(0));
+        public static readonly DependencyProperty FirstNameProperty =
+            DependencyProperty.Register("FirstName", typeof(string), typeof(MemberItemComponent), new PropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty PlanTitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
-
-        public static readonly DependencyProperty PlanCreatedAtProperty =
-            DependencyProperty.Register("CreatedAt", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
-
-        public static readonly DependencyProperty PlanTokenProperty =
-          DependencyProperty.Register("Token", typeof(string), typeof(PlanItemCard), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty LastNameProperty =
+            DependencyProperty.Register("LastName", typeof(string), typeof(MemberItemComponent), new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty UserIdProperty =
-                 DependencyProperty.Register("UserId", typeof(int), typeof(PlanItemCard), new PropertyMetadata(0));
-        public int PlanId
+                 DependencyProperty.Register("UserId", typeof(int), typeof(MemberItemComponent), new PropertyMetadata(0));
+
+        public static readonly DependencyProperty EmailProperty =
+            DependencyProperty.Register("Email", typeof(string), typeof(MemberItemComponent), new PropertyMetadata(string.Empty));
+
+        public string FirstName
         {
-            get { return (int)GetValue(PlanIdProperty); }
-            set { SetValue(PlanIdProperty, value); }
+            get { return (string)GetValue(FirstNameProperty); }
+            set { SetValue(FirstNameProperty, value); }
         }
 
-        public string Title
+        public string LastName
         {
-            get { return (string)GetValue(PlanTitleProperty); }
-            set { SetValue(PlanTitleProperty, value); }
-        }
-
-        public string CreatedAt
-        {
-            get { return (string)GetValue(PlanCreatedAtProperty); }
-            set { SetValue(PlanCreatedAtProperty, value); }
-        }
-
-        public string Token
-        {
-            get { return (string)GetValue(PlanTokenProperty); }
-            set { SetValue(PlanTokenProperty, value); }
+            get { return (string)GetValue(LastNameProperty); }
+            set { SetValue(LastNameProperty, value); }
         }
 
         public int UserId
@@ -70,37 +51,23 @@ namespace ChronosClient.Components
             set { SetValue(UserIdProperty, value); }
         }
 
-
-        static HttpClient client = new HttpClient();
-        static bool isClient = false;
-        string jwtToken;
-        public PlanItemCard(string token)
+        public string Email
+        {
+            get { return (string)GetValue(EmailProperty); }
+            set { SetValue(EmailProperty, value); }
+        }
+        public MemberItemComponent()
         {
             InitializeComponent();
-            jwtToken = token;
-            if (!isClient)
-            {
-                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
-                isClient = true;
-            }
         }
 
-        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var dashboardScreen = (DashboardScreen)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            dashboardScreen.dashboardFrame.Navigate(new PlanScreen(UserId, Token, PlanId));
-        }
-
-        void Image_Loaded(object sender, RoutedEventArgs e)
+        private void Image_Loaded(object sender, RoutedEventArgs e)
         {
             Image img = sender as Image;
             //PlanTitle.Text.StartsWith("C", true, CultureInfo.InvariantCulture
             if (img != null)
             {
-                if (Title.StartsWith("A", true, CultureInfo.InvariantCulture))
+                if (FirstName.StartsWith("A", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -108,7 +75,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("B", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("B", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -116,7 +83,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("C", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("C", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -124,7 +91,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("D", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("D", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -132,7 +99,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("E", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("E", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -140,7 +107,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("F", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("F", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -148,7 +115,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("G", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("G", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -156,7 +123,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("H", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("H", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -164,7 +131,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("I", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("I", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -172,7 +139,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("J", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("J", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -180,7 +147,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("K", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("K", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -188,7 +155,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("L", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("L", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -196,7 +163,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("M", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("M", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -204,7 +171,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("N", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("N", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -212,7 +179,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("O", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("O", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -220,7 +187,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("P", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("P", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -228,7 +195,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("Q", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("Q", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -236,7 +203,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("R", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("R", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -244,7 +211,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("S", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("S", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -252,7 +219,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("T", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("T", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -260,7 +227,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("U", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("U", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -268,7 +235,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("V", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("V", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -276,7 +243,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("W", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("W", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -284,7 +251,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("X", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("X", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -292,7 +259,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("Y", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("Y", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -300,7 +267,7 @@ namespace ChronosClient.Components
                     bitmapImage.EndInit();
                     img.Source = bitmapImage;
                 }
-                else if (Title.StartsWith("Z", true, CultureInfo.InvariantCulture))
+                else if (FirstName.StartsWith("Z", true, CultureInfo.InvariantCulture))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -309,25 +276,6 @@ namespace ChronosClient.Components
                     img.Source = bitmapImage;
                 }
             }
-        }
-
-        static async Task<HttpResponseMessage> DeleteBucketAsync(Plan plan)
-        {
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                Content = new StringContent("{ PlanID:" + plan.PlanId.ToString() + "}", Encoding.UTF8, "application/json"),
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri("https://chronosapi.azurewebsites.net/api/plans")
-            };
-            HttpResponseMessage message = await client.SendAsync(request);
-            return message;
-        }
-
-        private async void delete_plan_Click(object sender, RoutedEventArgs e)
-        {
-            Plan plan = new Plan { PlanId = (int)GetValue(PlanIdProperty) };
-            var response = await DeleteBucketAsync(plan);
-            DashboardHomeScreen.handler.OnChanged(e);
         }
     }
 }

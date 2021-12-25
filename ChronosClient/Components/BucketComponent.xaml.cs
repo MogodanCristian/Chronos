@@ -31,8 +31,8 @@ namespace ChronosClient.Components
 
         public static readonly DependencyProperty BucketIdProperty =
             DependencyProperty.Register("BucketId", typeof(int), typeof(BucketComponent), new PropertyMetadata(0));
-     
-        
+
+
         public string BucketTitle
         {
             get { return (string)GetValue(BucketTitleProperty); }
@@ -64,7 +64,6 @@ namespace ChronosClient.Components
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(jwtToken);
                 isClient = true;
             }
-
         }
 
         static async Task<HttpResponseMessage> DeleteBucketAsync(Bucket bucket)
