@@ -80,7 +80,7 @@ namespace ChronosClient.Screens.Pages
                     dashboardScreen.Show();
 
                     var mainWindow = Application.Current.MainWindow as MainWindow;
-                       mainWindow.Close();
+                    mainWindow.Close();
 
 
                 }
