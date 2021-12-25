@@ -18,6 +18,7 @@ using ChronosClient.Screens.Windows.Popups;
 using System.Net;
 using System.Net.Http.Headers;
 using ChronosClient.Models.Auth;
+using System.IO;
 
 
 
@@ -29,6 +30,7 @@ namespace ChronosClient.Screens.Windows
     /// </summary>
     public partial class DashboardScreen : Window
     {
+        static bool isAlreadyInstantiated = false;
         static HttpClient client = new HttpClient();
         DashboardHomeScreen dashboardHomeScreen;
         UserAuthResponse userAuth;
@@ -75,9 +77,14 @@ namespace ChronosClient.Screens.Windows
         public DashboardScreen(string jwt)
         {
             InitializeComponent();
-            client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if(!isAlreadyInstantiated)
+            {
+                client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                isAlreadyInstantiated = true;
+            }
+   
             initializeUserLoggedIn(jwt);
         }
 
@@ -96,6 +103,15 @@ namespace ChronosClient.Screens.Windows
         private void profile_button_Click(object sender, RoutedEventArgs e)
         {
             dashboardFrame.Content = dashboardHomeScreen;
+        }
+
+        private void sign_out_button_Click(object sender, RoutedEventArgs e)
+        {
+            string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "jwt");    
+            File.Delete(dest);
+            MainWindow mainWindow = new MainWindow(); 
+            mainWindow.Show(); 
+            this.Close();
         }
     }
 }

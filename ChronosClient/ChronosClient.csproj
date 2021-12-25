@@ -284,15 +284,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Letters\a.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Letters\b.png" />
-    <Resource Include="Resources\Letters\Balb.png" />
     <Resource Include="Resources\Letters\c.png" />
     <Resource Include="Resources\Letters\d.png" />
     <Resource Include="Resources\Letters\e.png" />
@@ -319,6 +314,11 @@
     <Resource Include="Resources\Letters\z.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plus.png" />
+    <Resource Include="Resources\sign_out.png" />
     <Resource Include="Resources\members.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

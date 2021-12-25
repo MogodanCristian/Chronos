@@ -25,6 +25,7 @@ namespace ChronosClient.Screens.Pages
     /// </summary>
     public partial class DashboardHomeScreen : Page
     {
+        static bool isAlreadyInstantiated = false;
         static HttpClient client = new HttpClient();
         UserAuthResponse user;
 
@@ -40,6 +41,14 @@ namespace ChronosClient.Screens.Pages
             {
                 user = userAuth;
                 InitializeComponent();
+                if(!isAlreadyInstantiated)
+                {
+                    client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(userAuth.Token);
+                    isAlreadyInstantiated = true;
+                } 
                 handler = new UpdateHandler();
                 handler.Changed += new ChangedEventHandlerTasks(PlansChanged);
                 client.BaseAddress = new Uri("https://chronosapi.azurewebsites.net/api/");

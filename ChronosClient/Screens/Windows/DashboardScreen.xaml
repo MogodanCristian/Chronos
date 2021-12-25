@@ -12,7 +12,7 @@
             <ColumnDefinition Width="368*"/>
         </Grid.ColumnDefinitions>
 
-        <Frame x:Name="dashboardFrame" NavigationUIVisibility="Hidden" Margin="17.4,0,-0.4,0" Grid.Column="1" Foreground="#FF2C2F33"/>
+        <Frame x:Name="dashboardFrame" NavigationUIVisibility="Hidden" Margin="7.6,0,9.6,0.4" Grid.Column="1" Foreground="#FF2C2F33"/>
         <Label Content="Chronos&#xA; Planner" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="49" Width="58" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
         <Menu Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="112" Margin="0,54,0,0" VerticalAlignment="Top" Width="58" Background="#FF2C2F33">
             <Button x:Name="new_plan_button" Height="49" Width="51" Margin="-4,3,0,0" FontSize="48" Padding="1,-15,1,1" Click="new_plan_button_Click" Background="#FF404EED">
@@ -22,5 +22,8 @@
                 <Image Source="\Resources\home.png" Stretch="Fill"/>
             </Button> />
         </Menu>
+        <Button x:Name="sign_out_button" Height="Auto" Width="51" Margin="3.4,665,20,22" UseLayoutRounding="False" FontSize="14" Click="sign_out_button_Click" Background="#FF404EED" >
+            <Image Source="\Resources\sign_out.png" Stretch="Fill"/>
+        </Button>
     </Grid>
 </Window>
