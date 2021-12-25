@@ -26,7 +26,7 @@ namespace ChronosClient.Views
             InitializeComponent();
         }
 
-        public void addMemberItem(int userId, string firstName, string lastName)
+        public void addMemberItem(int userId, string firstName, string lastName, string email)
         {
 
             MembersWrapPanelPlanItems.Children.Add(new MemberItemComponent
@@ -34,7 +34,8 @@ namespace ChronosClient.Views
                 UserId = userId,
                 FirstName = firstName,
                 LastName = lastName,
-                Margin = new Thickness(10)
+                Margin = new Thickness(10),
+                Email = email
             });
 
         }

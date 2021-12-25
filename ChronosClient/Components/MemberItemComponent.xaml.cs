@@ -30,6 +30,9 @@ namespace ChronosClient.Components
         public static readonly DependencyProperty UserIdProperty =
                  DependencyProperty.Register("UserId", typeof(int), typeof(MemberItemComponent), new PropertyMetadata(0));
 
+        public static readonly DependencyProperty EmailProperty =
+            DependencyProperty.Register("Email", typeof(string), typeof(MemberItemComponent), new PropertyMetadata(string.Empty));
+
         public string FirstName
         {
             get { return (string)GetValue(FirstNameProperty); }
@@ -46,6 +49,12 @@ namespace ChronosClient.Components
         {
             get { return (int)GetValue(UserIdProperty); }
             set { SetValue(UserIdProperty, value); }
+        }
+
+        public string Email
+        {
+            get { return (string)GetValue(EmailProperty); }
+            set { SetValue(EmailProperty, value); }
         }
         public MemberItemComponent()
         {

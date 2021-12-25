@@ -87,6 +87,12 @@ namespace ChronosClient.Screens.Pages
             return response;
         }
 
+        private async Task<HttpResponseMessage> NotifyUserAddedInPlanAsync(EmailModel emailModel)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync("email", emailModel);
+            return response;
+        }
+
         public async void initializeBuckets(int PlanId)
         {
             BucketPanelView.clearBuckets();
@@ -136,7 +142,7 @@ namespace ChronosClient.Screens.Pages
                 foreach (UserMemberInfo userInPlan in membersInPlan)
                 {
                     // add user to panel view.
-                    MembersWrapPanelView.addMemberItem(userInPlan.UserId, userInPlan.FirstName, userInPlan.LastName);
+                    MembersWrapPanelView.addMemberItem(userInPlan.UserId, userInPlan.FirstName, userInPlan.LastName, userInPlan.Email);
                 }
             }
         }
@@ -148,12 +154,28 @@ namespace ChronosClient.Screens.Pages
                 UserId = memberToAdd.UserId,
                 PlanId = PlanId
             };
-
             var response = await PostUserInPlanAsync(planDispatcher);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                MembersWrapPanelView.addMemberItem(memberToAdd.UserId, memberToAdd.FirstName, memberToAdd.LastName);
+                MembersWrapPanelView.addMemberItem(memberToAdd.UserId, memberToAdd.FirstName, memberToAdd.LastName, memberToAdd.Email);
             }
+            if(response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show("Member already assigned to this plan! Check it out!");
+            }
+
+            var currUser = users.First(a => a.UserId == UserId);
+            string msg = $"Hello {memberToAdd.FirstName},\nYour friend {currUser.FirstName + " " + currUser.LastName} assigned you to a new Plan! Check it out!\n\nThis notification is sent by Chronos Dev Team.";
+
+            EmailModel emailModel = new EmailModel
+            {
+                toname = memberToAdd.FirstName + " " + memberToAdd.LastName,
+                toemail = memberToAdd.Email,
+                subject = "Chronos Plan Membership",
+                message = msg
+            };
+
+            response = await NotifyUserAddedInPlanAsync(emailModel);
         }
         public PlanScreen(int UserId, string token, int PlanId)
         {

@@ -121,6 +121,7 @@
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BucketCreateModel.cs" />
     <Compile Include="Models\BucketList.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\PlanDispatcher.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
