@@ -123,6 +123,7 @@
     <Compile Include="Models\BucketList.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\PlanDispatcher.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\TaskCreateModel.cs" />
     <Compile Include="Models\TasksForPlanResponse.cs" />
     <Compile Include="Models\UpdateHandler.cs" />

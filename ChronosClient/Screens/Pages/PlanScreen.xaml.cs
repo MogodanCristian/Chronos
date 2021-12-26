@@ -87,7 +87,7 @@ namespace ChronosClient.Screens.Pages
             return response;
         }
 
-        private async Task<HttpResponseMessage> NotifyUserAddedInPlanAsync(EmailModel emailModel)
+        private async Task<HttpResponseMessage> NotifyUserInPlanAsync(EmailModel emailModel)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync("email", emailModel);
             return response;
@@ -175,7 +175,7 @@ namespace ChronosClient.Screens.Pages
                 message = msg
             };
 
-            response = await NotifyUserAddedInPlanAsync(emailModel);
+            response = await NotifyUserInPlanAsync(emailModel);
         }
         public PlanScreen(int UserId, string token, int PlanId)
         {
