@@ -12,14 +12,15 @@
         <Border Background="#FF2C2F33" BorderBrush="Gray" BorderThickness="1" CornerRadius="3" Padding="15">
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" >
                 <StackPanel Margin="5">
-                <Menu Background="White" HorizontalAlignment="Right" Margin="0,0,0,20">
-                    <MenuItem Header="..."  FontWeight="Bold" HorizontalAlignment="Right" Background="#FF404EED" Foreground="White" Height="22" Width="24">
-                        <MenuItem x:Name="delete_bucket" Header="Delete Bucket" FontWeight="Medium" Click="delete_bucket_Click" Foreground="Black"/>
-                    </MenuItem>
-                </Menu>
-                <Label x:Name="bucket_title" Content="{Binding BucketTitle}" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="White"/>
-                <Button x:Name="add_task" Content="Add New Task" Width="100" Height="20" Margin="0,0,0,20" Click="add_task_Click" Background="#FF404EED" Foreground="White"/>
-                <views:TaskView x:Name="taskView"/>
+                    <Menu Background="White" HorizontalAlignment="Right" Margin="0,0,0,20">
+                        <MenuItem Header="..."  FontWeight="Bold" HorizontalAlignment="Right" Background="#FF404EED" Foreground="White" Height="22" Width="24">
+                            <MenuItem x:Name="delete_bucket" Header="Delete Bucket" FontWeight="Medium" Click="delete_bucket_Click" Foreground="Black"/>
+                        </MenuItem>
+                    </Menu>
+                    <Label x:Name="bucket_title" Content="{Binding BucketTitle}" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button x:Name="add_task" Content="Add New Task" Width="100" Height="20" Margin="-125,0,0,20" Click="add_task_Click" Background="#FF404EED" Foreground="White"/>
+                    <Button x:Name="load_task_from_file" Content="Load Tasks" Width="100" Height="20" Margin="125,-40,0,20" Click="load_task_from_file_Click" Background="#FF404EED" Foreground="White" VerticalAlignment="Center"/>
+                    <views:TaskView x:Name="taskView"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>
