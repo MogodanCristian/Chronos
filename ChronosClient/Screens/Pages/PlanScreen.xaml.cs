@@ -95,7 +95,7 @@ namespace ChronosClient.Screens.Pages
 
         public async void initializeBuckets(int PlanId)
         {
-            BucketPanelView.clearBuckets();
+            //BucketPanelView.clearBuckets();
             List<Bucket> bucketItems = await GetBucketItems(PlanId);
             if (bucketItems != null)
             {
@@ -108,7 +108,7 @@ namespace ChronosClient.Screens.Pages
         }
         public async void initializeTasksInBuckets(int PlanId)
         {
-            BucketPanelView.clearBuckets();
+            //BucketPanelView.clearBuckets();
             List<Bucket> bucketItems = await GetBucketItems(PlanId);
             List<TasksForPlanResponse> tasksInPlan = await GetTaskItems(PlanId);
             if (bucketItems != null)
@@ -214,12 +214,14 @@ namespace ChronosClient.Screens.Pages
         }
         private void BucketsChanged(object sender, EventArgs e)
         {
+            BucketPanelView.clearBuckets();
             initializeTasksInBuckets(PlanSelectedId);
         }
 
         private void TasksChanged(object sender, EventArgs e)
         {
             ///fetch from database;
+            BucketPanelView.clearBuckets();
             initializeTasksInBuckets(PlanSelectedId);
         }
 

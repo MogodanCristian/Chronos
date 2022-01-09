@@ -20,20 +20,34 @@ namespace ChronosClient.Views
     /// <summary>
     /// Interaction logic for BucketView.xaml
     /// </summary>
+    /// 
     public partial class BucketView : UserControl
     {
+        List<BucketComponent> m_buckets;
         public BucketView()
         {
             InitializeComponent();
+            m_buckets = new List<BucketComponent>();
         }
         public void AddBucket(string bucketTitle, int bucketId, int userId, string token)
         {
-            buckets.Children.Add(new BucketComponent(userId, token)
+            BucketComponent newBucket = new BucketComponent(userId, token)
             {
-                BucketTitle = bucketTitle,
                 BucketId = bucketId,
+                BucketTitle = bucketTitle,
                 Margin = new Thickness(10)
-            });
+            };
+
+            foreach(var t in m_buckets)
+            {
+                if(t.BucketId == newBucket.BucketId)
+                {
+                    return;
+                }
+            }
+
+            m_buckets.Add(newBucket);
+            buckets.Children.Add(newBucket);
         }
 
         public void AddTaskToBucketComponent(int bucketId, TasksForPlanResponse task)
@@ -49,8 +63,9 @@ namespace ChronosClient.Views
         }
         public void clearBuckets()
         {
-            if(buckets.Children.Count > 0)
+            if (buckets.Children.Count > 0)
             {
+                m_buckets.Clear();
                 buckets.Children.Clear();
             }
         }
